@@ -1,3 +1,7 @@
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
+import java.sql.Array;
+import java.sql.SQLSyntaxErrorException;
 import java.util.*;
 
 public class Solution {
@@ -336,9 +340,7 @@ public class Solution {
         System.out.print(res);
         return res;
     }
-    //438
-
-    /**
+    /**438
      * Find All Anagrams in a String
      * @param s
      * @param p
@@ -374,5 +376,209 @@ public class Solution {
             System.out.println(index.get(i));
         }
         return index;
+    }
+
+    /**
+     * 349,寻找两个数组的公共元素 set的使用方式
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> set1 = new HashSet<>();
+        for(int i = 0; i < nums1.length; i++){
+            set1.add(nums1[i]);
+        }
+        HashSet<Integer> set2 = new HashSet<>();
+        for(int j = 0; j < nums2.length; j++){
+            if(set1.contains(nums2[j])){
+                set2.add(nums2[j]);
+            }
+        }
+        int[] result = new int[set2.size()];
+        Iterator iterator = set2.iterator();
+        int i = 0;
+        while(iterator.hasNext()){
+            result[i] = Integer.parseInt(iterator.next().toString());
+            System.out.println(result[i]);
+            i++;
+        }
+        return result;
+    }
+
+    /**
+     * 350，寻找两个数组中的公共元素，允许重复出现，map的用法
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public int[] intersect(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> hashMap1 = new HashMap<>();
+        for(int i = 0; i < nums1.length; i++){
+            if(hashMap1.containsKey(nums1[i])){
+                hashMap1.put(nums1[i], hashMap1.get(nums1[i]) + 1);
+            }else {
+                hashMap1.put(nums1[i], 1);
+            }
+        }
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for(int i = 0; i < nums2.length; i++){
+            if(hashMap1.get(nums2[i]) != null && hashMap1.get(nums2[i]) > 0){
+                arrayList.add(nums2[i]);
+                int tem = hashMap1.get(nums2[i])-1;
+                hashMap1.put(nums2[i], tem);
+            }
+        }
+        int[] result = new int[arrayList.size()];
+        for(int i = 0; i < arrayList.size(); i++){
+            result[i] = arrayList.get(i);
+            System.out.println(result[i]);
+        }
+        System.out.println(hashMap1.get(null));
+        return result;
+    }
+
+    /**
+     * 1
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum1(int[] nums, int target) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        int[] result = new int[2];
+        for(int i = 0; i < nums.length; i++){
+            int temp = target - nums[i];
+            if(hashMap.containsKey(temp)){
+                result[1] = i;
+                result[0] = hashMap.get(temp);
+                System.out.println(result[0]+" "+result[1]);
+                return result;
+            }
+            hashMap.put(nums[i], i);
+        }
+        return result;
+    }
+
+    /**
+     * 454
+     * @param A
+     * @param B
+     * @param C
+     * @param D
+     * @return
+     */
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for(int i = 0; i < A.length; i++){
+            for(int j = 0; j < B.length; j++){
+                if(hashMap.containsKey(A[i] + B[j])){
+                    hashMap.put((A[i] + B[j]), hashMap.get(A[i] + B[j])+1);
+                }else {
+                    hashMap.put((A[i] + B[j]), 1);
+                }
+            }
+        }
+        int result = 0;
+        for(int i = 0; i < C.length; i++){
+            for(int j = 0; j < D.length; j++){
+                if(hashMap.get(0 - C[i] - D[j]) != null && hashMap.get(0 - C[i] - D[j]) > 0){
+                    result += hashMap.get(0 - C[i] - D[j]);
+                }
+            }
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    /**
+     * 49
+     * @param strs
+     * @return
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> resultList = new ArrayList<>();
+        ArrayList<String> tempArraylist = new ArrayList<>();
+        for(int i = 0; i < strs.length; i++){
+            tempArraylist.add(strs[i]);
+        }
+        for(int i = 0; i < tempArraylist.size(); i++){
+            List<String> list1 = new ArrayList<>();
+            list1.add(tempArraylist.get(i));
+            for(int j = i+1; j < tempArraylist.size(); j++){
+                System.out.println("tempArraylist.get(i) = "+tempArraylist.get(i)+
+                        " tempArraylist.get(j) = "+tempArraylist.get(j));
+                if(StringIsEquals(tempArraylist.get(i), tempArraylist.get(j))){
+                    System.out.println("tempArraylist.get(i) = tempArraylist.get(j)");
+                    list1.add(tempArraylist.get(j));
+                    tempArraylist.remove(j);
+                    j -= 1;
+                    System.out.println("tempArraylist = "+tempArraylist);
+                }
+            }
+            resultList.add(list1);
+            System.out.println(list1);
+        }
+        System.out.println(resultList);
+        return resultList;
+    }
+
+    public boolean StringIsEquals(String str1, String str2){
+        HashMap<Integer, Integer> hashMap1 = new HashMap<>();
+        HashMap<Integer, Integer> hashMap2 = new HashMap<>();
+        for(int i = 0; i < str1.length(); i++){
+            int num = str1.charAt(i);
+            if(hashMap1.get(num) != null && hashMap1.get(num) > 0 ){
+                hashMap1.put(num, hashMap1.get(num) + 1);
+            }else {
+                hashMap1.put(num, 1);
+            }
+        }
+        for(int i = 0; i < str2.length(); i++){
+            int num = str2.charAt(i);
+            if(hashMap2.get(num) != null && hashMap2.get(num) > 0){
+                hashMap2.put(num, hashMap2.get(num) + 1);
+            }else {
+                hashMap2.put(num, 1);
+            }
+        }
+        if(hashMap1.equals(hashMap2)){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     * 49 优化
+     * 用到了字符数组的排序，首先将所有的字符串转为字符数组，
+     * 再对所有的字符数组进行排序，再转为字符串
+     * 由此，所有的字符串都变为相同的
+     * hashmap里存放的是<String, List>,
+     * 分别表示排序之后的到的字符串、与此字符串相同的字符串原来的样子</>
+     * 输出的时候只需要将hashmap中的所有values组成的list取出，放进list中，即可构成List<List<String>>的形式</>
+     * @param strs
+     * @return
+     */
+    public List<List<String>> groupAnagrams1(String[] strs) {
+        HashMap<String, List> hashMap = new HashMap<>();
+        for(int i = 0; i < strs.length; i++){
+            char[] ca = strs[i].toCharArray();
+            Arrays.sort(ca);
+            String key = String.valueOf(ca);
+            System.out.println("key = "+key);
+            if(hashMap.containsKey(key)){
+                System.out.println("hashMap.containsKey("+key+")");
+                hashMap.get(key).add(strs[i]);
+            }else {
+                List<String> l = new ArrayList<>();
+                l.add(strs[i]);
+                hashMap.put(key, l);
+            }
+        }
+        List<List<String>> result = new ArrayList<>();
+        result = new ArrayList(hashMap.values());
+        System.out.println(result);
+        return result;
     }
 }
