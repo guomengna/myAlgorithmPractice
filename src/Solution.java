@@ -581,4 +581,286 @@ public class Solution {
         System.out.println(result);
         return result;
     }
+
+
+    /**
+     * 206 反转链表
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while( cur != null ){
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        ListNode t = pre;
+        while(t != null){
+            System.out.println(t.val);
+            t = t.next;
+        }
+        return pre;
+    }
+
+    /**
+     * 92
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        if(m == n){
+            return head;
+        }
+        ListNode cur = head;
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        while(cur != null){
+            arrayList.add(cur.val);
+            cur = cur.next;
+        }
+        int l = m-1;
+        int r = n-1;
+        while(l <= r ){
+            int tem = arrayList.get(l);
+            arrayList.set(l, arrayList.get(r));
+            arrayList.set(r, tem);
+            l++;
+            r--;
+        }
+        ListNode newHead = createList(arrayList);
+        return newHead;
+    }
+    public ListNode createList(ArrayList<Integer> a){
+        ListNode head = new ListNode(a.get(0));
+        ListNode cur = head;
+        for(int i = 1; i < a.size(); i++){
+            cur.next = new ListNode(a.get(i));
+            cur = cur.next;
+        }
+        return head;
+    }
+
+    /**
+     * 102
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if( root == null ){
+            return result;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        ((LinkedList<TreeNode>) queue).add(root);
+        while(!queue.isEmpty()){
+            List<Integer> temp = new ArrayList<>();
+            int count = queue.size();
+            while(count > 0){
+                TreeNode treeNode = queue.poll();
+                temp.add(treeNode.val);
+                if( treeNode.left != null ){
+                    ((LinkedList<TreeNode>) queue).add(treeNode.left);
+                }
+                if(treeNode.right != null){
+                    ((LinkedList<TreeNode>) queue).add(treeNode.right);
+                }
+                count--;
+            }
+            result.add(temp);
+        }
+        return result;
+    }
+
+    /**
+     * 107 自底向上返回二叉树的层序遍历
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if( root == null ){
+            return result;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        ((LinkedList<TreeNode>) queue).add(root);
+        while(!queue.isEmpty()){
+            List<Integer> temp = new ArrayList<>();
+            int count = queue.size();
+            while(count > 0){
+                TreeNode treeNode = queue.poll();
+                temp.add(treeNode.val);
+                if( treeNode.left != null ){
+                    ((LinkedList<TreeNode>) queue).add(treeNode.left);
+                }
+                if(treeNode.right != null){
+                    ((LinkedList<TreeNode>) queue).add(treeNode.right);
+                }
+                count--;
+            }
+            result.add(temp);
+        }
+        System.out.println(result+" "+result.size());
+        List<List<Integer>> result1 = new ArrayList<>();
+        for(int i = result.size()-1; i >= 0; i--){
+            System.out.println("i = "+i);
+            result1.add(result.get(i));
+        }
+        System.out.println(result1);
+        return result1;
+    }
+
+    /**
+     * 103 “之”字形打印二叉树
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if( root == null ){
+            return result;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        ((LinkedList<TreeNode>) queue).add(root);
+        while(!queue.isEmpty()){
+            List<Integer> temp = new ArrayList<>();
+            int count = queue.size();
+            while(count > 0){
+                TreeNode treeNode = queue.poll();
+                temp.add(treeNode.val);
+                if( treeNode.left != null ){
+                    ((LinkedList<TreeNode>) queue).add(treeNode.left);
+                }
+                if(treeNode.right != null){
+                    ((LinkedList<TreeNode>) queue).add(treeNode.right);
+                }
+                count--;
+            }
+            result.add(temp);
+        }
+        int cou = 1;
+        for(int i = 0; i < result.size(); i++){
+            if(cou % 2 == 0){
+                List<Integer> list = result.get(i);
+                int l = 0;
+                int r = list.size()-1;
+                while(l < r){
+                    int temp = list.get(l);
+                    list.set(l, list.get(r));
+                    list.set(r, temp);
+                    l++;
+                    r--;
+                }
+                result.set(i, list);
+            }
+            cou ++;
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    /**
+     * 199 二叉树的右视图 层次遍历 每次只保留每层最后一个节点
+     * @param root
+     * @return
+     */
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if( root == null ){
+            return result;
+        }
+        List<List<Integer>> resultTemp = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        ((LinkedList<TreeNode>) queue).add(root);
+        while(!queue.isEmpty()){
+            List<Integer> temp = new ArrayList<>();
+            int count = queue.size();
+            while(count > 0){
+                TreeNode treeNode = queue.poll();
+                temp.add(treeNode.val);
+                if( treeNode.left != null ){
+                    ((LinkedList<TreeNode>) queue).add(treeNode.left);
+                }
+                if(treeNode.right != null){
+                    ((LinkedList<TreeNode>) queue).add(treeNode.right);
+                }
+                count--;
+            }
+            resultTemp.add(temp);
+        }
+        for(int i = 0; i < resultTemp.size(); i++){
+            List<Integer> r = resultTemp.get(i);
+            result.add(r.get(r.size()-1));
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    /**
+     * 279 完全平方数 不正确
+     * @param n
+     * @return
+     */
+    public int numSquares(int n) {
+        Queue<Integer> queue = new LinkedList<>();
+
+        ((LinkedList<Integer>) queue).add(n);
+        int step = 0;
+        while(!queue.isEmpty()){
+            int num = queue.peek();
+            queue.poll();
+            if(num == 0){
+                System.out.println("step = "+step);
+                return step;
+            }
+            for(int i = 1; num - i*i >= 0; i++){
+                int t = num - i*i;
+                ((LinkedList<Integer>) queue).add(t);
+                step += 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 优先队列 347
+     * @param nums
+     * @param k
+     * @return
+     */
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        TreeMap<Integer, Integer> hashMap = new TreeMap<>();
+        for(int i = 0; i < nums.length; i++){
+            if(hashMap.containsKey(nums[i])){
+                hashMap.put(nums[i], hashMap.get(nums[i])+1);
+            }else {
+                hashMap.put(nums[i], 1);
+            }
+        }
+        List<Integer> res = new ArrayList<>();
+        if(k > hashMap.size()){
+            return res;
+        }
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> hashMap.get(a) - hashMap.get(b));
+        for(int key : hashMap.keySet()){
+            if(priorityQueue.size() < k){
+                priorityQueue.add(key);
+            }else if(hashMap.get(key) > hashMap.get(priorityQueue.peek())){
+                priorityQueue.remove();
+                priorityQueue.add(key);
+            }
+        }
+        while (!priorityQueue.isEmpty()){
+            res.add(priorityQueue.remove());
+        }
+        System.out.println(res);
+        return res;
+    }
 }
+
