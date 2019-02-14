@@ -102,23 +102,37 @@ public class Main {
         ListNode l7 = new ListNode(5);
 //        l6.next = l7;
 //        solution.reverseBetween(l6, 1, 1);
-//        TreeNode t1 = new TreeNode(3);
-//        TreeNode t2 = new TreeNode(9);
-//        TreeNode t3 = new TreeNode(20);
-//        TreeNode t4 = new TreeNode(15);
-//        TreeNode t5 = new TreeNode(7);
-//        t1.left = t2;
-//        t1.right = t3;
-//        t2.left = t4;
-//        t3.right = t5;
+        TreeNode t1 = new TreeNode(3);
+        TreeNode t2 = new TreeNode(9);
+        TreeNode t3 = new TreeNode(20);
+        TreeNode t4 = new TreeNode(15);
+        TreeNode t5 = new TreeNode(7);
+        t1.left = t2;
+        t1.right = t3;
+        t3.left = t4;
+        t3.right = t5;
 //        solution.rightSideView(t1);
 //        solution.numSquares(4);
 //        Queue<Integer> queue = new LinkedList<>();
 //        ((LinkedList<Integer>) queue).add(1);
 //        ((LinkedList<Integer>) queue).add(2);
 //        System.out.println(queue.peek());
-        int[] a = {1,1,2,3,3,3,4,4,5,5,5,5};
-        solution.topKFrequent(a,2);
+        int[] a = {1,3,1,5};
+//        solution.topKFrequent(a,2);
+//        solution.getHight(t1);
+//        solution.getResult(t1);
+//        solution.minDepth(t1);
+//        solution.invertTree(t1);
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(2);
+        TreeNode node4 = new TreeNode(1);
+        node1.left = node2;
+        node1.right = node3;
+        node2.left = node4;
+//        solution.isSameTree(node1,node4);
+//        solution.isSameTree(t1,t1);
+        solution.countNodes(node1);
     }
 
 }

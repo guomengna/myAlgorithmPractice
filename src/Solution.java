@@ -652,10 +652,10 @@ public class Solution {
      * @param root
      * @return
      */
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public int levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if( root == null ){
-            return result;
+            return 0;
         }
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         ((LinkedList<TreeNode>) queue).add(root);
@@ -675,7 +675,9 @@ public class Solution {
             }
             result.add(temp);
         }
-        return result;
+        int high = result.size();
+        System.out.println(high);
+        return high;
     }
 
     /**
@@ -861,6 +863,204 @@ public class Solution {
         }
         System.out.println(res);
         return res;
+    }
+    //柠檬微趣测试题三道
+    //1、获得二叉树的高度
+    public int getHight(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        return Math.max(getHight(root.left), getHight(root.right))+1;
+    }
+    //2、找出两个相同整数的最远距离
+    public int getDistance(int[] nums){
+        HashMap<Integer,List<Integer>> hashMap = new LinkedHashMap<>();
+        for(int i = 0; i < nums.length; i++){
+            if(hashMap.containsKey(nums[i])){
+                List temp = hashMap.get(nums[i]);
+                temp.add(i);
+                hashMap.put(nums[i], temp);
+                System.out.println( hashMap.get(nums[i]));
+            }else {
+                hashMap.put(nums[i], new ArrayList<>());
+            }
+        }
+        int res = 0;
+        for(int key : hashMap.keySet()){
+            List list = new ArrayList();
+            list = hashMap.get(key);
+            System.out.println(list);
+            if(list.size() > 0){
+
+                for(int i = 0; i < list.size(); i++){
+                    for(int j = i+1; j < list.size(); j++){
+                        int t = Integer.parseInt(list.get(i).toString()) -
+                                Integer.parseInt(list.get(j).toString());
+                        res = Math.max(t, res);
+                    }
+                }
+            }
+        }
+//        System.out.println(res+1);
+        return res;
+    }
+
+    //3、二叉树的最浅叶节点的和
+    public int getResult(TreeNode root){
+        List<Integer> leaf = new ArrayList<>();
+        if(root == null){
+            return 0;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        ((LinkedList<TreeNode>) queue).add(root);
+        int high = -1;
+        while(!queue.isEmpty() && high == -1){
+            int count = queue.size();
+            while(count > 0){
+                TreeNode t = queue.poll();
+                if(t.left == null && t.right == null){
+                    high = count;
+                    leaf.add(t.val);
+                }
+                if (t.left != null){
+                    ((LinkedList<TreeNode>) queue).add(t.left);
+                }
+                if(t.right != null){
+                    ((LinkedList<TreeNode>) queue).add(t.right);
+                }
+                count--;
+            }
+        }
+        int res = 0;
+        for(int i = 0; i <leaf.size(); i++){
+            res += Integer.parseInt(leaf.get(i).toString());
+        }
+        return res;
+    }
+
+    /**
+     *  104 二叉树的最大深度
+     * @param root
+     * @return
+     */
+    public int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return Math.max(maxDepth(root.left), maxDepth(root.right))+1;
+    }
+
+    /**
+     * 111 最小二叉树的高度
+     * @param root
+     * @return
+     */
+    public int minDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        if(root.left != null && root.right != null){
+//            System.out.println(Math.min(minDepth(root.left), minDepth(root.right))+1);
+            return Math.min(minDepth(root.left), minDepth(root.right))+1;
+        }else if(root.left != null){
+//            System.out.println(minDepth(root.left)+1);
+            return minDepth(root.left)+1;
+        }else if(root.right != null){
+//            System.out.println(minDepth(root.right)+1);
+            return minDepth(root.right)+1;
+        }else {
+//            System.out.println(1);
+            return 1;
+        }
+    }
+
+    /**
+     * 翻转二叉树 226
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null){
+            return root;
+        }
+        invertTree(root.left);
+        invertTree(root.right);
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        return root;
+    }
+
+    /**
+     * 100 判断二叉树是否相同
+     * @param p
+     * @param q
+     * @return
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null && q == null ){
+            System.out.println("p and q = null");
+            return true;
+        }
+        if(p != null && q != null){
+            if(p.val == q.val){
+                System.out.println("p.val = "+p.val+" , q.val = "+p.val);
+                return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 101 一棵二叉树是否是镜像对称的
+     * 递归解法
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        return isMirror(root, root);
+    }
+    public boolean isMirror(TreeNode t1, TreeNode t2){
+        if(t1 == null && t2 == null){
+            return true;
+        }else if(t1 == null || t2 == null){
+            return false;
+        }else if(t1.val == t2.val){
+            return isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left);
+        }else {
+            return false;
+        }
+    }
+
+    public int countNodes(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return countNodes(root.left)+countNodes(root.right)+1;
+    }
+
+    /**
+     * 110 给定一个二叉树，判断它是否是高度平衡的二叉树。
+     * @param root
+     * @return
+     */
+    public boolean isBalanced(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        if ((getHigh(root.left) - getHigh(root.right)) > 1 ||
+                (getHigh(root.right) - getHigh(root.left)) > 1){
+            return false;
+        }else {
+            return isBalanced(root.left)&&isBalanced(root.right);
+        }
+    }
+    public int getHigh(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        return Math.max(getHigh(root.left), getHigh(root.right))+1;
     }
 }
 
