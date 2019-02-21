@@ -1,7 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Main {
 
@@ -77,17 +74,17 @@ public class Main {
 //        }
 //        String[] s = {"eat", "tea", "tan", "ate", "nat", "bat"};
 //        solution.groupAnagrams1(s);
-        ListNode l1 = new ListNode(1);
-        ListNode l2 = new ListNode(2);
-        ListNode l3 = new ListNode(3);
-        ListNode l4 = new ListNode(4);
-        ListNode l5 = new ListNode(5);
-        l1.next = l2;
-        l2.next = l3;
-        l3.next = l4;
-        l4.next = l5;
+//        ListNode l1 = new ListNode(1);
+//        ListNode l2 = new ListNode(2);
+//        ListNode l3 = new ListNode(3);
+//        ListNode l4 = new ListNode(4);
+//        ListNode l5 = new ListNode(5);
+//        l1.next = l2;
+//        l2.next = l3;
+//        l3.next = l4;
+//        l4.next = l5;
 //        solution.reverseList(l1);
-        ListNode cur = l1;
+//        ListNode cur = l1;
 //        int i = 1;
 //        while(cur != null){
 //            if(i >= 2 && i <= 4){
@@ -98,41 +95,58 @@ public class Main {
 //            i ++;
 //        }
 //        solution.reverseBetween(l1, 2, 4);
-        ListNode l6 = new ListNode(3);
-        ListNode l7 = new ListNode(5);
+//        ListNode l6 = new ListNode(3);
+//        ListNode l7 = new ListNode(5);
 //        l6.next = l7;
 //        solution.reverseBetween(l6, 1, 1);
-        TreeNode t1 = new TreeNode(3);
-        TreeNode t2 = new TreeNode(9);
-        TreeNode t3 = new TreeNode(20);
-        TreeNode t4 = new TreeNode(15);
-        TreeNode t5 = new TreeNode(7);
-        t1.left = t2;
-        t1.right = t3;
-        t3.left = t4;
-        t3.right = t5;
+//        TreeNode t1 = new TreeNode(3);
+//        TreeNode t2 = new TreeNode(9);
+//        TreeNode t3 = new TreeNode(20);
+//        TreeNode t4 = new TreeNode(15);
+//        TreeNode t5 = new TreeNode(7);
+//        t1.left = t2;
+//        t1.right = t3;
+//        t3.left = t4;
+//        t3.right = t5;
 //        solution.rightSideView(t1);
 //        solution.numSquares(4);
 //        Queue<Integer> queue = new LinkedList<>();
 //        ((LinkedList<Integer>) queue).add(1);
 //        ((LinkedList<Integer>) queue).add(2);
 //        System.out.println(queue.peek());
-        int[] a = {1,3,1,5};
+//        int[] a = {1,3,1,5};
 //        solution.topKFrequent(a,2);
 //        solution.getHight(t1);
 //        solution.getResult(t1);
 //        solution.minDepth(t1);
 //        solution.invertTree(t1);
-        TreeNode node1 = new TreeNode(1);
-        TreeNode node2 = new TreeNode(2);
-        TreeNode node3 = new TreeNode(2);
-        TreeNode node4 = new TreeNode(1);
-        node1.left = node2;
-        node1.right = node3;
-        node2.left = node4;
+//        TreeNode node1 = new TreeNode(1);
+//        TreeNode node2 = new TreeNode(2);
+//        TreeNode node3 = new TreeNode(2);
+//        TreeNode node4 = new TreeNode(1);
+//        node1.left = node2;
+//        node1.right = node3;
+//        node2.left = node4;
 //        solution.isSameTree(node1,node4);
 //        solution.isSameTree(t1,t1);
-        solution.countNodes(node1);
+//        solution.countNodes(node1);
+//        int a[] = {1,2,3,4};
+//        System.out.println(solution.binearySearch(a, 3));
+//        int b[][] = {{1,2,8,9},{2,4,9,12},{4,7,10,13},{6,8,11,15}};
+//        int c[][] = {{}};
+//        solution.Find(7, c);
+//        String s = "hello  world";
+//        if(String.valueOf(s.charAt(3)).equals(" ")){
+//            System.out.println("space");
+//        }
+//        StringBuffer sb = new StringBuffer(s);
+//        solution.replaceSpace(sb);
+        ListNode l1 = new ListNode(1);
+        ListNode l2 = new ListNode(2);
+        ListNode l3 = new ListNode(3);
+        l1.next = l2;
+        l2.next = l3;
+        solution.reverseListNode(l1);
     }
 
 }

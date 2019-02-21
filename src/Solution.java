@@ -1,3 +1,4 @@
+import org.omg.CORBA.ARG_IN;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.sql.Array;
@@ -1061,6 +1062,119 @@ public class Solution {
             return 0;
         }
         return Math.max(getHigh(root.left), getHigh(root.right))+1;
+    }
+
+    /**
+     * 二维数组中的查找
+     * @param target
+     * @param array
+     * @return
+     */
+    public boolean Find(int target, int [][] array) {
+        if(array.length == 0 || (array.length ==1 && array[array.length-1].length == 0)){
+            System.out.println("false");
+            return false;
+        }
+        int[] tempMin = new int[array.length];
+        int[] tempMax = new int[array.length];
+        for(int i = 0; i < array.length; i++){
+            tempMin[i] = array[i][0];
+            tempMax[i] = array[i][array[i].length-1];
+        }
+        for(int i = 0; i < tempMin.length; i++){
+            if(tempMin[i] <= target || tempMax[i] >= target){
+                int result = binearySearch(array[i], target);
+                if(result != -1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int binearySearch(int[] a, int target){
+       int left = 0;
+       int right = a.length-1;
+       while(left <= right){
+           int mid = (left + right)/2;
+           if(a[mid] == target){
+               return mid;
+           }else if(a[mid] > target){
+               right = mid - 1;
+           }else {
+               left = mid + 1;
+           }
+       }
+       return -1;
+    }
+
+    /**
+     * 剑指offer 2
+     * 将一个字符串中的每个空格替换成“%20”
+     * @param str
+     * @return
+     */
+    public String replaceSpace(StringBuffer str) {
+        int point = 0;
+        System.out.println("str.length() = "+str.length());
+        while(point < str.length()){
+            if(String.valueOf(str.charAt(point)).equals(" ")){
+                str.insert(point,"%20");
+                point += 3;
+                str.deleteCharAt(point);
+            }else {
+                point += 1;
+            }
+        }
+        System.out.println(str);
+        return str.toString();
+    }
+
+    /**
+     * 剑指offer 3
+     * 输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。
+     * @param listNode
+     * @return
+     */
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+//        ArrayList<Integer> temp = getListNode(listNode);
+        ArrayList<Integer> result = new ArrayList<>();
+//        if(temp.size() <= 1){
+//            return temp;
+//        }
+//        for(int i = temp.size()-1; i>=0; i--){
+//            result.add(temp.get(i));
+//        }
+//        return result;
+        ListNode newHead = reverseListNode(listNode);
+        while(newHead != null){
+            result.add(newHead.val);
+            newHead = newHead.next;
+        }
+        return result;
+    }
+
+    public ListNode reverseListNode(ListNode head){
+        ListNode pre = null;
+        ListNode current = head;
+        while(current != null){
+            ListNode next = current.next;
+            current.next = pre;
+            pre = current;
+            current = next;
+        }
+        return pre;
+    }
+    public ArrayList<Integer> getListNode(ListNode head){
+        if(head == null){
+            return new ArrayList<>();
+        }
+        ArrayList<Integer> temp = new ArrayList<>();
+        temp.add(head.val);
+        while(head.next != null){
+            getListNode(head.next);
+        }
+        return temp;
     }
 }
 
