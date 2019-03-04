@@ -141,12 +141,214 @@ public class Main {
 //        }
 //        StringBuffer sb = new StringBuffer(s);
 //        solution.replaceSpace(sb);
-        ListNode l1 = new ListNode(1);
-        ListNode l2 = new ListNode(2);
-        ListNode l3 = new ListNode(3);
-        l1.next = l2;
-        l2.next = l3;
-        solution.reverseListNode(l1);
+//        ListNode l1 = new ListNode(1);
+//        ListNode l2 = new ListNode(2);
+//        ListNode l3 = new ListNode(3);
+//        l1.next = l2;
+//        l2.next = l3;
+//        solution.reverseListNode(l1);
+//        int[] pre = {1,2,4,7,3,5,6,8};
+//        int[] in = {4,7,2,1,5,3,8,6};
+//        solution.foundAllRoot(pre, in, 0, 7);
+        SolutionLeetcode solutionLeetcode = new SolutionLeetcode();
+//        TreeNode t1 = new TreeNode(5);
+//        TreeNode t2 = new TreeNode(4);
+//        TreeNode t3 = new TreeNode(8);
+//        t1.left = t2;
+//        t1.right = t3;
+//        TreeNode t4 = new TreeNode(11);
+//        t2.left = t4;
+//        TreeNode t5 = new TreeNode(13);
+//        TreeNode t6 = new TreeNode(4);
+//        t3.left = t5;
+//        t3.right = t6;
+//        TreeNode t7 = new TreeNode(7);
+//        TreeNode t8 = new TreeNode(2);
+//        t4.left = t7;
+//        t4.right = t8;
+//        TreeNode t9 = new TreeNode(5);
+//        TreeNode t10 = new TreeNode(1);
+//        t6.left = t9;
+//        t6.right = t10;
+//        solutionLeetcode.pathSum(t1, 22);
+        TreeNode t1 = new TreeNode(1);
+        TreeNode t2 = new TreeNode(1);
+//        TreeNode t3 = new TreeNode(4);
+        t1.left = t2;
+//        t1.right = t3;
+//        TreeNode t4 = new TreeNode(3);
+//        TreeNode t5 = new TreeNode(6);
+//        t3.left = t4;
+//        t3.right = t5;
+        solutionLeetcode.isValidBST(t1);
     }
-
 }
+//import java.awt.*;
+//import java.util.ArrayList;
+//import java.util.Scanner;
+//public class Main {
+//    public static void main(String[] args) {
+//        //input
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int[] killer = new int[n];
+//        for(int i = 0; i < n; i++){
+//            killer[i] = sc.nextInt();
+//        }
+//        System.out.println(nightCount(killer,n));
+//    }
+//    //how many nights needed to stop killing
+//    private static int nightCount(int[] killer, int n) {
+//        int count = 0;
+//        while(judgeIfKill(killer)){
+//            count++;
+//            int j = 0;//how many killers has been killed
+//            for(int i = killer.length-1; i>0; i--){
+//                if(killer[i] < killer[i-1]){
+//                    killer[i] = -1;//if this killer is killed, make it -1
+//                    j++;
+//                }
+//            }
+//            //killer's length should minus j
+//            killer = change(killer,killer.length - j);
+//        }
+//        return count;
+//    }
+//    //killer has changed
+//    private static int[] change(int[] killer, int num) {
+//        int[] newKiller = new int[num];
+//        for(int i = 0,k = 0; i < killer.length; i++){
+//            if(killer[i] != -1){
+//                newKiller[k] = killer[i];
+//                k++;
+//            }
+//        }
+//        return newKiller;
+//    }
+//    //judge if need to kill
+//    private static boolean judgeIfKill(int[] killer) {
+//        boolean flag = false;
+//        for(int i = 1; i < killer.length; i++){
+//            if(killer[i] == -1)
+//                continue;
+//            if(killer[i-1] > killer[i]){
+//                flag = true;
+//            }
+//        }
+//        return flag;
+//    }
+//public class Main {
+//    public static void main(String[] args) {
+//        //input
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int[] nums = new int[n];//存储输入的数组
+//        for(int i = 0; i < n; i++){
+//            nums[i] = sc.nextInt();
+//
+//        }
+//        int result = -1000;
+//        for(int i = 0; i < nums.length-1; i++){
+//            int minSum = FrontMinSum(nums, i);
+//            int maxSum = AfterMaxSum(nums, i);
+//            int temp = maxSum - minSum;
+//            if(result < temp){
+//                result = temp;
+//            }
+//        }
+//        System.out.println(result);
+//    }
+//    //下标index之前数的最小和
+//    private static int FrontMinSum(int[] nums, int index){
+//        if(index == 0 || index == 1){
+//            return 0;
+//        }
+//        int minSum = 0;
+//        for(int i = index-1; i > 0; i--){
+//            int temp = minSum + nums[i];
+//            if(temp < minSum){
+//                minSum = temp;
+//            }
+//        }
+//        return minSum;
+//    }
+//    //下标index及其之后数的最大和
+//    private static int AfterMaxSum(int[] nums, int index){
+//        if(index == nums.length-1){
+//            return nums[index];
+//        }
+//        int maxSum = nums[index];
+//        for(int i = index+1; i <= nums.length-1; i++){
+//            int temp = maxSum + nums[i];
+//            if(temp > maxSum){
+//                maxSum = temp;
+//            }
+//        }
+//        return maxSum;
+//    }
+//
+//    public static void main(String[] args) {
+//        Scanner s1 = new Scanner(System.in);
+//        String Left1_1 = s1.next();
+//        String Left2_1 = s1.next();
+//        Scanner s2 = new Scanner(System.in);
+//        String right1_1 = s2.next();
+//        System.out.println(Left1_1 +"+"+ Left2_1+"="+right1_1);
+//
+//        Scanner s3 = new Scanner(System.in);
+//        String Left1_2 = s3.next();
+//        String Left2_2 = s3.next();
+//        Scanner s4 = new Scanner(System.in);
+//        String right1_2 = s4.next();
+//        String right2_2 = s4.next();
+//        System.out.println(Left1_2 +"-"+ Left2_2+"="+right1_2+"+"+right2_2);
+//
+//        double x,y;
+//        for(x=1;x<100;x++){
+//            for(y=1;y<100;y++){
+//                if( (3*x+2*y) == 10 && (4*x - y)==(4+y)){
+//                    System.out.println(x+" "+y);
+//                }
+//            }
+//        }
+//    }
+//    public static void main(String[] args) {
+//        ArrayList<Integer> numes = new ArrayList<>();
+//        Scanner sc = new Scanner(System.in);
+//        numes.add(sc.nextInt());
+//        while(sc.hasNextLine()){
+//            Scanner s = new Scanner(System.in);
+//            int a = s.nextInt();
+//            if(a != 0)
+//                numes.add(a);
+//            if(a == -1){
+//                break;
+//            }
+//            int b = s.nextInt();
+//            if(b == -1){
+//                break;
+//            }
+//            if(b != 0){
+//                for(int j =a+1; j<=b;j++){
+//                    numes.add(j);
+//                }
+//            }
+//        }
+//        System.out.println(numes);
+//        int left =0;
+//        int right = left+1;
+//        int count = 1;
+//        while(right<numes.size()){
+//            if(numes.get(right)-numes.get(left) ==1){
+//                right++;
+//                left++;
+//                count ++;
+//            }else {
+//                right++;
+//                left++;
+//                count=1;
+//            }
+//        }
+//        System.out.println(count);
+//    }
+//}

@@ -1,3 +1,4 @@
+import com.sun.deploy.util.SyncAccess;
 import org.omg.CORBA.ARG_IN;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
@@ -1176,5 +1177,64 @@ public class Solution {
         }
         return temp;
     }
+
+    /**
+     * 剑指offer 4
+     * 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。
+     * 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+     * @param pre
+     * @param in
+     * @return
+     */
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        return null;
+    }
+    public TreeNode foundAllRoot(int[] pre, int[] in, int start, int end){
+        System.out.println("开始一轮新的算法————————start = "+start+" end = "+end);
+        if(start > end){
+            return null;
+        }else if(start == end){
+            int root = pre[start];
+            TreeNode rootNode = new TreeNode(root);
+            System.out.println("*********************root = "+root);
+            return rootNode;
+        }
+        int root = pre[start];
+        int inStart = start;
+        int inEnd = end;
+        System.out.println("**********************root = "+root);
+        while(inStart < inEnd){
+            if(in[inStart] == root){
+                int indexRoot = inStart;
+                System.out.println("indexRoot = "+indexRoot);
+                System.out.println("start = "+(start)+" and end = "+(indexRoot-1));
+                foundAllRoot(pre, in, start, indexRoot-1);
+                System.out.println("start = "+(indexRoot+1)+" and end = "+(end));
+                foundAllRoot(pre, in, indexRoot+1, end);
+                break;
+            }else {
+                inStart ++;
+            }
+        }
+        TreeNode rootNode = new TreeNode(root);
+        return rootNode;
+    }
+
+    /**
+     * 剑指offer 5
+     * 用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型
+     */
+//    Stack<Integer> stack1 = new Stack<Integer>();
+//    Stack<Integer> stack2 = new Stack<Integer>();
+//
+//    public void push(int node) {
+//
+//    }
+//
+//    public int pop() {
+//
+//    }
+
+
 }
 
