@@ -171,17 +171,23 @@ public class Main {
 //        t6.left = t9;
 //        t6.right = t10;
 //        solutionLeetcode.pathSum(t1, 22);
-        TreeNode t1 = new TreeNode(1);
-        TreeNode t2 = new TreeNode(1);
+//        TreeNode t1 = new TreeNode(1);
+//        TreeNode t2 = new TreeNode(1);
 //        TreeNode t3 = new TreeNode(4);
-        t1.left = t2;
+//        t1.left = t2;
 //        t1.right = t3;
 //        TreeNode t4 = new TreeNode(3);
 //        TreeNode t5 = new TreeNode(6);
 //        t3.left = t4;
 //        t3.right = t5;
-        solutionLeetcode.isValidBST(t1);
+//        solutionLeetcode.isValidBST(t1);
+//        solutionLeetcode.returnfib(40);
+//        solutionLeetcode.integerBreak(32);
+//        solutionLeetcode.insertSort();
+//        solutionLeetcode.numSquares(12);
+        solutionLeetcode.uniquePaths(3,2);
     }
+
 }
 //import java.awt.*;
 //import java.util.ArrayList;
