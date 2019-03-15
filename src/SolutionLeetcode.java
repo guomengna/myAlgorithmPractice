@@ -2,6 +2,7 @@ import com.sun.deploy.util.SyncAccess;
 import com.sun.org.apache.xml.internal.security.exceptions.AlgorithmAlreadyRegisteredException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -430,5 +431,157 @@ public class SolutionLeetcode {
         System.out.println(res[m-1][n-1]);
         return res[m-1][n-1];
     }
+    //归并排序
+    public int[] mergeSort(int[] a, int low, int high){
+        int mid = (low + high)/2;
+        if(low < high){
+            mergeSort(a, low, mid);
+            mergeSort(a,mid+1, high);
+            a = merge(a, low, high, mid);
+        }
+        return a;
+    }
+    public int[] merge(int a[], int low, int high, int mid){
+        int[] temp = new int[a.length];
+        int i = low;
+        int j = mid + 1;
+        int num = 0;
+        while (i <= mid && j <= high){
+            if(a[i] < a[j]){
+                temp[num] = a[i];
+                i++;
+            }else if(a[i] > a[j]){
+                temp[num] = a[j];
+                j++;
+            }else {
+                temp[num] = a[i];
+                temp[++num] = a[i];
+                i++;
+                j++;
+            }
+            num += 1;
+        }
+        a = temp;
+        return a;
+    }
+
+    /**
+     * 寻找数组中的支配者，数量超过数组一半的为支配者，否则返回-1；
+     * @param a
+     * @return
+     */
+    public int judge(int[] a){
+        HashMap<Integer, Integer> res = new HashMap<>();
+        for(int i = 0; i < a.length; i++){
+            if(res.containsKey(a[i])){
+                res.put(a[i], res.get(a[i])+1);
+            }else {
+                res.put(a[i], 1);
+            }
+        }
+        for(int i = 0; i < a.length; i++){
+            if(res.get(a[i]) >= (a.length/2)){
+                System.out.println(a[i]);
+                return a[i];
+            }
+        }
+        System.out.println("无 "+-1);
+        return -1;
+    }
+
+    /**
+     * 约瑟夫环问题,面试宝典的191页
+     */
+    public void usaJapa(){
+        Boolean usajapa[] = new Boolean[30];
+        for(int i = 0; i < usajapa.length; i++){
+            usajapa[i] = true;//开始的时候数组中都为true，丢下海的位置改为false
+        }
+        int leftcount = usajapa.length;
+        int count = 0;//记录有多少个人被丢下海
+        int index = 0;//记录当前的索引，即当前数到哪个位置了,下次需要从index的下一个位置开始数
+        while(leftcount > 15){
+//            System.out.println("leftcount = "+leftcount);
+            count ++;
+            if(count == 9){
+                count = 0;
+                //如果当前的index位置为false，则index向下顺延，知道找到一个不是false的位置，将其置为false
+                while(usajapa[index] == false){
+                    index ++;
+                }
+                usajapa[index] = false;
+                leftcount -- ;
+            }
+            index++;
+            if(index == usajapa.length){
+                index = 0;
+            }
+        }
+        //存放15个教徒应该站的位置，此15个位置为安全位置，，在每次数9个数的情况下不会被丢下海
+        ArrayList<Integer> res = new ArrayList<>();
+        for(int i = 0; i < usajapa.length; i++){
+            if(usajapa[i] == true){
+                res.add(i);
+            }
+        }
+        System.out.println("res.size = "+res.size());
+        System.out.println("教徒所占的位置应该为"+res);
+    }
+    //小写字母变成大写字母
+    public String changeToCap(String a){
+        char[] c = a.toCharArray();
+        for(int i = 0; i < c.length; i++){
+            if(c[i] > 96){
+                c[i] = (char)(c[i]-32);
+//                System.out.println(c[i]-32);
+//                System.out.println("c["+i+"] = "+c[i]);
+            }
+        }
+//        System.out.println(c);
+        return String.valueOf(c);
+    }
+    //比较是否a小于b
+    public boolean compString(String a, String b){
+        int index = 0;
+        String a1 = changeToCap(a);
+//        System.out.println("a1 = " + a1);
+        String b1 = changeToCap(b);
+//        System.out.println("b1 = " + b1);
+        while (index < Math.min(a.length(), b.length())){
+            if(a1.charAt(index) < b1.charAt(index)){
+                System.out.println(true);
+                return true;
+            }else if(a1.charAt(index) > b1.charAt(index)){
+                System.out.println(false);
+                return false;
+            }else {
+                index ++;
+            }
+        }
+        if(a.length() > b.length()){
+            System.out.println(false);
+            return false;
+        }
+        System.out.println(true);
+        return true;
+    }
+
+    public String[] compareStrings(){
+        String[] strings = {"Bc", "Ad", "aC", "Hello", "X man", "little"};
+        for(int i = 0; i < strings.length; i++){
+            for(int j = i+1; j < strings.length; j++){
+                if(!compString(strings[i], strings[j])){
+                    String temp = strings[i];
+                    strings[i] = strings[j];
+                    strings[j] = temp;
+                }
+            }
+        }
+        for(int i = 0; i < strings.length; i++){
+            System.out.print(strings[i]+",");
+        }
+        return strings;
+    }
+
 
 }

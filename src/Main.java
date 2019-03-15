@@ -1,3 +1,5 @@
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 import java.util.*;
 
 public class Main {
@@ -185,7 +187,85 @@ public class Main {
 //        solutionLeetcode.integerBreak(32);
 //        solutionLeetcode.insertSort();
 //        solutionLeetcode.numSquares(12);
-        solutionLeetcode.uniquePaths(3,2);
+//        solutionLeetcode.uniquePaths(3,2);
+//        int[] a = {3, 4, 3, 2, -1, 3, 3, 3};
+//        solutionLeetcode.judge(a);
+//        solutionLeetcode.compareStrings();
+//        solutionLeetcode.compString("Ad", "X man");
+////        Scanner in = new Scanner(System.in);
+//        String string = "aabbaaabbc";
+////        string = in.nextLine();
+//        char s = string.charAt(0);
+//        double count = 1,d;
+//        for(int i = 0; i < string.length(); i++){
+//            if(string.charAt(i)<65 || string.charAt(i)>91){
+//                System.out.println(0);
+//                return;
+//            }
+//            if(s!=string.charAt(i)){
+//                s = string.charAt(i);
+//                count ++;
+//            }
+//        }
+//        d = string.length()/count;
+//        System.out.println(String.format("%.2f",d));
+
+//        Scanner sc = new Scanner(System.in);
+//        while(sc.hasNext()) {
+//            if(sc.nextDouble()==0){
+//                break;
+//            }
+//            double h = sc.nextDouble();
+//            double u = sc.nextDouble();
+//            double d = sc.nextDouble();
+//            if (h == 0 && u == 0 && d == 0) {
+//                System.out.println(0);
+//                return;
+//            }
+//            if(h<=u || u<=d || h<=d){
+//                break;
+//            }
+//            int day = 0;
+//            String str = "success on day ";
+//            double high = 0;//代表走的高度
+//            while (high <= h) {
+//                day++;
+//                high = high + u;//u表示白天走的路程
+//                if (high > h) {
+//                    break;
+//                }
+//                high = high - d;//晚上下滑
+//                if (high < 0) {//从这天起一直会在井底，走不出
+//                    str = "failure on day ";
+//                    break;
+//                }
+//            }
+//            System.out.println(day);
+
+//        Scanner in=new Scanner(System.in);
+//        String inputString = in.nextLine();
+//        String stringArray[] = inputString.split(" ");
+//        int num[] = new int[stringArray.length];
+//        for (int i = 0; i < stringArray.length; i++) {
+//            num[i] = Integer.parseInt(stringArray[i]);
+//        }
+//        Map<Integer,Integer> map=new HashMap<>();
+//        for(int m=0;m<num.length;m++){
+//            if(map.containsKey(num[m])){
+//                map.put(num[m],map.get(num[m])+1);
+//            }else {
+//                map.put(num[m],1);
+//            }
+//        }
+//        int count=0;
+//        for (Integer key:map.keySet()){
+//            if(map.get(key)==1){
+//                count++;
+//            }
+//        }
+//        System.out.println(count);
+        TestSolution testSolution = new TestSolution();
+        testSolution.getSubString();
     }
 
 }
