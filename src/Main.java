@@ -1,3 +1,4 @@
+import com.sun.deploy.util.SyncAccess;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.util.*;
@@ -265,7 +266,8 @@ public class Main {
 //        }
 //        System.out.println(count);
         TestSolution testSolution = new TestSolution();
-        testSolution.getSubString();
+        testSolution.unrepeatNum();
+
     }
 
 }
