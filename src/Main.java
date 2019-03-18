@@ -266,7 +266,7 @@ public class Main {
 //        }
 //        System.out.println(count);
         TestSolution testSolution = new TestSolution();
-        testSolution.unrepeatNum();
+        testSolution.eatingFish();
 
     }
 

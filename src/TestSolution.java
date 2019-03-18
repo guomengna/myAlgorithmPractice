@@ -1,7 +1,5 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.awt.image.AreaAveragingScaleFilter;
+import java.util.*;
 
 public class TestSolution {
     //输出字符串的子串，重复的字母的个数及字母
@@ -82,6 +80,58 @@ public class TestSolution {
                 System.out.println(t);
             }
         }
+    }
+    //大鱼吃小鱼游戏
+    public void eatingFish(){
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        Scanner sc1 = new Scanner(System.in);
+        ArrayList<Integer> nums = new ArrayList<>();
+        for(int i = 0; i < size; i++){
+            nums.add(sc1.nextInt());
+        }
+        eating(nums);
+    }
+    public int eating(ArrayList<Integer> nums){
+        if(nums.size() == 1){
+            System.out.println("nums.get(0) = "+Math.abs(nums.get(0)));
+            return Math.abs(nums.get(0));
+        }else {
+            for(int i = 0; i < nums.size(); i++){
+                //i的左右都有值
+                if(i >= 1  && i < nums.size()-1){
+                    //向右吃
+                    ArrayList right = nums;
+                    right.set(i, nums.get(i)-nums.get(i + 1));
+                    right.remove(i + 1);
+                    //向左吃
+                    ArrayList left = nums;
+                    left.set(i, nums.get(i)-nums.get(i - 1));
+                    left.remove(i - 1);
+                    i--;
+//                    System.out.println(Math.max(eating(left), eating(right)));
+                    return Math.abs(Math.max(eating(left), eating(right)));
+                }
+                if(i == 0){//i的右边有值，左边没有值
+                    //向右吃
+                    ArrayList right = nums;
+                    right.set(i, nums.get(i)-nums.get(i + 1));
+                    right.remove(i + 1);
+//                    System.out.println(Math.abs(eating(right)));
+                    return Math.abs(eating(right));
+                }
+                if(i == nums.size() - 1){//i的左边有值，右边没有值
+                    //向左吃
+                    ArrayList left = nums;
+                    left.set(i, nums.get(i)-nums.get(i - 1));
+                    left.remove(i - 1);
+//                    System.out.println(Math.abs(eating(left)));
+                    return Math.abs(eating(left));
+                }
+            }
+        }
+        System.out.println(-1000);
+        return -1000;
     }
 
 }
