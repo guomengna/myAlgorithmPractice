@@ -129,4 +129,36 @@ public class Niuke2018 {
         }
     }
 
+    // 网易 等差数列
+    public void euqalDiffrenceNums(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for(int i = 0; i < n; i++){
+            nums[i] = sc.nextInt();
+        }
+        for(int i = 0; i < n; i++){
+            for(int j = i; j < n; j++){
+                if(nums[j] < nums[i]){
+                    int temp = nums[j];
+                    nums[j] = nums[i];
+                    nums[i] = temp;
+                }
+            }
+        }
+        int d = nums[1] - nums[0];
+        int count = 1;
+        for(int i = 1; i+1 < n; i++){
+            if(nums[i+1] - nums[i] != d){
+                break;
+            }else{
+                count++;
+            }
+        }
+        if(count == n-1){
+            System.out.println("Possible");
+        }else{
+            System.out.println("Impossible");
+        }
+    }
 }
