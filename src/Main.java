@@ -8,7 +8,6 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
        TestSolution testSolution = new TestSolution();
-       testSolution.huawei4();
 //        Scanner sc = new Scanner(System.in);
 //        ArrayList<String> arrayList = new ArrayList<>();
 //        HashSet<String> hashSet = new HashSet<>();

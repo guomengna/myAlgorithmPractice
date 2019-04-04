@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Niuke2018 {
@@ -105,5 +106,27 @@ public class Niuke2018 {
         return a;
     }
 
+    // 网易 彩色的砖块
+    public void colorsBrick(){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+        for(int i = 0; i < str.length(); i++){
+            if(map.containsKey(str.charAt(i))){
+                map.put(str.charAt(i), map.get(str.charAt(i))+1);
+            }else{
+                map.put(str.charAt(i), 1);
+            }
+        }
+        if(map.size() > 2){
+            System.out.println(0);
+        }else if(map.size() == 2){
+            System.out.println(2);
+        }else if(map.size() == 1){
+            System.out.println(1);
+        }else if(map.size() == 0){
+            System.out.println(0);
+        }
+    }
 
 }
