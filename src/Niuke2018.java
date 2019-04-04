@@ -161,4 +161,36 @@ public class Niuke2018 {
             System.out.println("Impossible");
         }
     }
+
+    //网易 01交错串
+    public void stringwith01(){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        if(str.length() == 1){
+            System.out.println(1);
+            return;
+        }
+        if(str == null){
+            System.out.println(0);
+            return;
+        }
+        int count = 1;
+        int max = 1;
+        for(int i = 0; i+1 < str.length(); i++){
+            if(str.charAt(i) != str.charAt(i+1)){
+                count ++;
+            }else{
+                if(count > max){
+                    max = count;
+                }
+                count = 1;
+            }
+            if(i+1 == str.length()-1){
+                if(count > max){
+                    max = count;
+                }
+            }
+        }
+        System.out.println(max);
+    }
 }
