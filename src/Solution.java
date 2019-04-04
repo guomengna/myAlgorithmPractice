@@ -1187,53 +1187,35 @@ public class Solution {
      * @return
      */
     public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
-        return null;
+        TreeNode root = reConstructBinaryTree(pre, 0, pre.length-1, in, 0, in.length-1);
+        return root;
     }
-    public TreeNode foundAllRoot(int[] pre, int[] in, int start, int end){
-        System.out.println("开始一轮新的算法————————start = "+start+" end = "+end);
-        if(start > end){
+    private TreeNode reConstructBinaryTree(int [] pre,int startPre,int endPre,int [] in,int startIn,int endIn) {
+        if(startPre>endPre||startIn>endIn)
             return null;
-        }else if(start == end){
-            int root = pre[start];
-            TreeNode rootNode = new TreeNode(root);
-            System.out.println("*********************root = "+root);
-            return rootNode;
-        }
-        int root = pre[start];
-        int inStart = start;
-        int inEnd = end;
-        System.out.println("**********************root = "+root);
-        while(inStart < inEnd){
-            if(in[inStart] == root){
-                int indexRoot = inStart;
-                System.out.println("indexRoot = "+indexRoot);
-                System.out.println("start = "+(start)+" and end = "+(indexRoot-1));
-                foundAllRoot(pre, in, start, indexRoot-1);
-                System.out.println("start = "+(indexRoot+1)+" and end = "+(end));
-                foundAllRoot(pre, in, indexRoot+1, end);
+        TreeNode root=new TreeNode(pre[startPre]);
+        for(int i=startIn;i<=endIn;i++)
+            if(in[i]==pre[startPre]){
+                root.left=reConstructBinaryTree(pre,startPre+1,startPre+i-startIn,in,startIn,i-1);
+                root.right=reConstructBinaryTree(pre,i-startIn+startPre+1,endPre,in,i+1,endIn);
                 break;
-            }else {
-                inStart ++;
             }
-        }
-        TreeNode rootNode = new TreeNode(root);
-        return rootNode;
+        return root;
     }
 
     /**
      * 剑指offer 5
      * 用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型
      */
-//    Stack<Integer> stack1 = new Stack<Integer>();
-//    Stack<Integer> stack2 = new Stack<Integer>();
-//
-//    public void push(int node) {
-//
-//    }
-//
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+    public void push(int node) {
+
+    }
 //    public int pop() {
 //
 //    }
+
 
 
 }

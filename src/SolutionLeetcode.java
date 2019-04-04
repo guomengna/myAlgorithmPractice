@@ -284,7 +284,7 @@ public class SolutionLeetcode {
     }
 
     /**
-     * 343 分割整数，使得分割所得的各个数的乘积最小
+     * 343 分割整数，使得分割所得的各个数的乘积最大
      * @param n
      * @return
      */
@@ -582,6 +582,40 @@ public class SolutionLeetcode {
         }
         return strings;
     }
+
+    /**
+     * 198
+     * 打家劫舍
+     * 偷取不相邻房子中的宝物，获得最大的价值
+     * @param nums
+     * @return
+     */
+    int[] res;
+    public int rob(int[] nums) {
+        res = new int[nums.length];
+        for(int i = 0; i < nums.length; i++){
+            res[i] = -1;
+        }
+        int t = tryRob(nums, 0);
+        System.out.println(t);
+        return t;
+    }
+    public int tryRob(int[] nums, int index){
+        if(index >= nums.length){
+            return 0;
+        }
+        if(res[index] != -1){
+            return res[index];
+        }
+        int temp = 0;
+        for(int i = index; i < nums.length; i++){
+            temp = Math.max(temp, nums[i] + tryRob(nums, i + 2));
+        }
+        res[index] = temp;
+        return temp;
+    }
+
+
 
 
 }
