@@ -1,138 +1,400 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
+import com.sun.deploy.util.SyncAccess;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
+//import java.util.*;
+import javax.swing.text.html.HTMLDocument;
+import java.util.*;
 public class Main {
-
     public static void main(String[] args) {
-        Solution solution = new Solution();
-//        Search search = new Search();
-//        int n = 1000000;
-//        int[] array = new int[n];
-//        for (int i=0;i<n;i++){
-//            array[i] = i;
-//        }
-//        double startTime = System.currentTimeMillis();//开始的时间，以毫秒计
-//        for(int j=0;j<n;j++){
-//            search.binarySearch(array, n, j);
-//        }
-//        double endTime = System.currentTimeMillis();//结束的时间，以毫秒计
-//        System.out.println("结束："+(endTime-startTime)/1000);
-//        int[] a = {3,1,0,3,12};
-//        int[] b = {4,5};
-//        int[] c = {1,3,12,0,0};
-//        int[] d = {1,3,3,5,12};
-//        int[] f = {1,2,3,3,3,3};
-//        int[] g = {1,2,2,2,2,3,3,3};
-//        int[] k = {0,2,1,2,1,0};
-//        int[] j = {1};
-//        int[] l = null;
-//        int[] m = {1,2,3,0,0,0};
-//        int[] n = {2,5,6};
-//        int[] m1 = {4,5,6,0,0,0};
-//        int[] n1 = {1,2,3};
-//        solution.moveZeroes(d);
-//        solution.removeElement(a, 3);
-//        solution.removeDuplicates(d);
-//        solution.removeDuplicates(f);
-//        solution.removeDuplicates2(b);
-//        solution.sortColors(k);
-//        solution.merge(c, 3, b, 2);
-//        solution.merge(j, 1, l, 0);
-//        solution.merge(m1, 3, n1, 3);
-//        int[] m2 = {1,2,3,5,6,7,13};
-//        solution.twoSum(m2, 11);//返回4,5
-//        int[] m3 = {1,3,5,6,7,13};
-//        solution.twoSum(m3, 14);//返回1,6
-//        solution.minSubArrayLen(7, n);
-//        solution.lengthOfLongestSubstring("");
-//        solution.findAnagrams("cbaebabacd", "abc");
-//        solution.findAnagrams("ccaebabacd", "abc");
-//        solution.findAnagrams("abab", "ab");
-//        solution.intersection(g, k);
-//        int[] n = {4, 9, 5};
-//        int[] m1 = {9, 4, 9, 8, 4};
-//        int[] n1 = {2, 7, 11, 15};
-////        solution.intersect(n, m1);
-//        solution.twoSum1(n, 13);
-//        solution.twoSum1(n1, 9);
-//        int[] a = {1, 2};
-//        int[] b = {-2, -1};
-//        int[] c = {-1, 2};
-//        int[] d = {0, 2};
-//        int[] a = {-1,-1};
-//        int[] b = {-1,1};
-//        int[] c = {-1,1};
-//        int[] d = {1,-1};
-//        solution.fourSumCount(a, b, c, d);
-//        HashMap<String,Integer> hashMap1 =  new HashMap<>();
-//        HashMap<String,Integer> hashMap2 =  new HashMap<>();
-//        hashMap1.put("str",2);
-//        hashMap2.put("str",2);
-//        if(hashMap1.equals(hashMap2)){
-//            System.out.println("true");
-//        }else {
-//            System.out.println("false");
-//        }
-//        String[] s = {"eat", "tea", "tan", "ate", "nat", "bat"};
-//        solution.groupAnagrams1(s);
-        ListNode l1 = new ListNode(1);
-        ListNode l2 = new ListNode(2);
-        ListNode l3 = new ListNode(3);
-        ListNode l4 = new ListNode(4);
-        ListNode l5 = new ListNode(5);
-        l1.next = l2;
-        l2.next = l3;
-        l3.next = l4;
-        l4.next = l5;
-//        solution.reverseList(l1);
-        ListNode cur = l1;
-//        int i = 1;
-//        while(cur != null){
-//            if(i >= 2 && i <= 4){
-//                System.out.println(cur.val);
-//
+       TestSolution testSolution = new TestSolution();
+//        Scanner sc = new Scanner(System.in);
+//        ArrayList<String> arrayList = new ArrayList<>();
+//        HashSet<String> hashSet = new HashSet<>();
+//        do{
+//            String s = sc.nextLine();
+//            System.out.println(s);
+//            if(s.equals(" ")){
+//                break;
+//            }else{
+//                //输入没有结束
+//                String regex = "^[a-z0-9A-Z]+$";
+//                if(s.matches(regex)) {
+//                    s = LeftRotateString(s, 10);
+//                    hashSet.add(s);
+//                }else {
+//                    arrayList.add(s);
+//                }
 //            }
-//            cur = cur.next;
-//            i ++;
+//        }while(true);
+//        Iterator it = hashSet.iterator();
+//        String[] right = new String[hashSet.size()];
+//        int i = 0;
+//        while(it.hasNext()){
+//            right[i] = it.next().toString();
+//            i++;
 //        }
-//        solution.reverseBetween(l1, 2, 4);
-        ListNode l6 = new ListNode(3);
-        ListNode l7 = new ListNode(5);
-//        l6.next = l7;
-//        solution.reverseBetween(l6, 1, 1);
-        TreeNode t1 = new TreeNode(3);
-        TreeNode t2 = new TreeNode(9);
-        TreeNode t3 = new TreeNode(20);
-        TreeNode t4 = new TreeNode(15);
-        TreeNode t5 = new TreeNode(7);
-        t1.left = t2;
-        t1.right = t3;
-        t3.left = t4;
-        t3.right = t5;
-//        solution.rightSideView(t1);
-//        solution.numSquares(4);
-//        Queue<Integer> queue = new LinkedList<>();
-//        ((LinkedList<Integer>) queue).add(1);
-//        ((LinkedList<Integer>) queue).add(2);
-//        System.out.println(queue.peek());
-        int[] a = {1,3,1,5};
-//        solution.topKFrequent(a,2);
-//        solution.getHight(t1);
-//        solution.getResult(t1);
-//        solution.minDepth(t1);
-//        solution.invertTree(t1);
-        TreeNode node1 = new TreeNode(1);
-        TreeNode node2 = new TreeNode(2);
-        TreeNode node3 = new TreeNode(2);
-        TreeNode node4 = new TreeNode(1);
-        node1.left = node2;
-        node1.right = node3;
-        node2.left = node4;
-//        solution.isSameTree(node1,node4);
-//        solution.isSameTree(t1,t1);
-        solution.countNodes(node1);
+//        right = getUrlParam(right);
+//        for(int j = 0; j < right.length; j++){
+//            System.out.println(right[j]);
+//        }
+//        for(int j = 0; j < arrayList.size(); j++){
+//            System.out.println(arrayList.get(i));
+//        }
+    }
+    // 按照字典序排序字符串数组
+    public static String[] getUrlParam(String[] keys){
+        for (int i = 0; i < keys.length - 1; i++) {
+            for (int j = 0; j < keys.length - i -1; j++) {
+                String pre = keys[j];
+                String next = keys[j + 1];
+                if(isMoreThan(pre, next)){
+                    String temp = pre;
+                    keys[j] = next;
+                    keys[j+1] = temp;
+                }
+            }
+        }
+        return keys;
+    }
+    private static boolean isMoreThan(String pre, String next){
+        if(null == pre || null == next || "".equals(pre) || "".equals(next)){
+            return false;
+        }
+        char[] c_pre = pre.toCharArray();
+        char[] c_next = next.toCharArray();
+        int minSize = Math.min(c_pre.length, c_next.length);
+        for (int i = 0; i < minSize; i++) {
+            if((int)c_pre[i] > (int)c_next[i]){
+                return true;
+            }else if((int)c_pre[i] < (int)c_next[i]){
+                return false;
+            }
+        }
+        if(c_pre.length > c_next.length){
+            return true;
+        }
+        return false;
     }
 
+    //循环左移
+    public static String LeftRotateString(String str,int n) {
+        if(str.length()==0||str==null)
+            return "";
+        String a=Rote(str);
+        String a1=Rote(a.substring(0, str.length()-n));
+        String a2=Rote(a.substring(str.length()-n, str.length()));
+        return  a1+a2;
+    }
+    static String Rote(String str){
+        char []a=new char[str.length()];
+        for(int i=0,j=str.length()-1;i<=j;i++,j--){
+            a[j]=str.charAt(i);
+            a[i]=str.charAt(j);
+        }
+        return String.valueOf(a);
+    }
+//
+
+//        Scanner sc = new Scanner(System.in);
+//        int k = sc.nextInt();
+//        int count = 0;
+//        int res = 0;
+//        for(int i = 13; count <= k; i += 2){
+//            if(ifSu(i)){
+//                if(!reverseNum(i)){
+//                    //i是素数,并且反过来与原来的值不相等
+//                    count++;
+//                }
+//            }
+//            if(count == k && i <= 1000000){
+//                res = i;
+//                break;
+//            }
+//        }
+//        System.out.println(res);
+
+    //        int rows = sc.nextInt();
+//        int cols = sc.nextInt();
+//        int thredhold = sc.nextInt();
+//
+//        boolean[][] visit = new boolean[rows][cols];
+//
+//        int count = movingCount(thredhold, rows, cols, 0, 0, visit);
+//        System.out.println(count);
+//        Scanner sc = new Scanner(System.in);
+//        int len = sc.nextInt();
+//        int[] nums = new int[len];
+//        for (int i = 0; i < nums.length; i++) {
+//            nums[i] = sc.nextInt();
+//        }
+//        //找出两个最小值和三个最大值
+//        if (nums.length < 3) {
+//            return;
+//        } else {
+//            long min1 = Long.MIN_VALUE;
+//            long min2 = Long.MIN_VALUE;
+//            long max1 = Long.MAX_VALUE;
+//            long max2 = Long.MAX_VALUE;
+//            long max3 = Long.MAX_VALUE;
+//            max1 = Math.max(nums[0], nums[1]);
+//            max2 = Math.min(nums[0], nums[1]);
+//            if (nums[2] > max1) {
+//                max3 = max2;
+//                max2 = max1;
+//                max1 = nums[2];
+//            } else if (nums[2] > max2) {
+//                max3 = max2;
+//                max2 = nums[2];
+//            } else {
+//                max3 = nums[2];
+//            }
+//            min1 = max3;
+//            min2 = max2;
+//            for (int i = 2; i < nums.length; i++) {
+//                if (nums[i] > max1) {
+//                    max3 = max2;
+//                    max2 = max1;
+//                    max1 = nums[i];
+//                } else if (nums[i] > max2) {
+//                    max3 = max2;
+//                    max2 = nums[i];
+//                } else if (nums[i] > max3) {
+//                    max3 = nums[i];
+//                }
+//                if (nums[i] < min1) {
+//                    min2 = min1;
+//                    min1 = nums[i];
+//                } else if (nums[i] < min2) {
+//                    min2 = nums[i];
+//                }
+//            }
+//            long res = 0;
+//            if (min2 >= 0) {//全部数字都为正
+//                res = max1 * max2 * max3;
+//                System.out.println(res);
+//                return;
+//            } else {
+//                res = Math.max(res, min1 * min2 * max1);
+//                System.out.println(res);
+//                return;
+//            }
+//        }
+    public static boolean reverseNum(int num){
+        StringBuffer sb = new StringBuffer(num + "");
+        int r = Integer.parseInt(sb.reverse().toString());
+        if(r != num){
+//            System.out.println("不相等");
+            return false;
+        }
+//        System.out.println("相等");
+        return true;
+    }
+    public static boolean ifSu(int num){
+        boolean r = false;
+        for(int i = 2; i <= num; i++){
+            if( (num % i) == 0 ){
+                if(((i != num) && (i != 1))){
+                    r = false;
+                    break;
+                }
+                if(i == num){
+                    r = true;
+                }
+            }
+        }
+        System.out.println(r);
+        return r;
+    }
+
+    public static int movingCount(int thredhold, int rows, int cols, int row, int col, boolean[][] visit){
+        if( row < 0 || row >= rows || col < 0 || col >= cols || visit[row][col] ||
+                gitDigitSum(row)+gitDigitSum(col) > thredhold){
+            return 0;
+        }
+        visit[row][col] = true;
+        return movingCount(thredhold, rows, cols, row-1, col, visit) +
+                movingCount(thredhold, rows, cols, row, col-1, visit) +
+                movingCount(thredhold, rows, cols, row+1, col, visit) +
+                movingCount(thredhold, rows, cols, row, col+1, visit) + 1;
+    }
+    public static int gitDigitSum(int row){
+        int sum = 0;
+        while(row != 0){
+            sum += row % 10;
+            row = row / 10;
+        }
+        return sum;
+    }
 }
+
+
+//import java.awt.*;
+//import java.util.ArrayList;
+//import java.util.Scanner;
+//public class Main {
+//    public static void main(String[] args) {
+//        //input
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int[] killer = new int[n];
+//        for(int i = 0; i < n; i++){
+//            killer[i] = sc.nextInt();
+//        }
+//        System.out.println(nightCount(killer,n));
+//    }
+//    //how many nights needed to stop killing
+//    private static int nightCount(int[] killer, int n) {
+//        int count = 0;
+//        while(judgeIfKill(killer)){
+//            count++;
+//            int j = 0;//how many killers has been killed
+//            for(int i = killer.length-1; i>0; i--){
+//                if(killer[i] < killer[i-1]){
+//                    killer[i] = -1;//if this killer is killed, make it -1
+//                    j++;
+//                }
+//            }
+//            //killer's length should minus j
+//            killer = change(killer,killer.length - j);
+//        }
+//        return count;
+//    }
+//    //killer has changed
+//    private static int[] change(int[] killer, int num) {
+//        int[] newKiller = new int[num];
+//        for(int i = 0,k = 0; i < killer.length; i++){
+//            if(killer[i] != -1){
+//                newKiller[k] = killer[i];
+//                k++;
+//            }
+//        }
+//        return newKiller;
+//    }
+//    //judge if need to kill
+//    private static boolean judgeIfKill(int[] killer) {
+//        boolean flag = false;
+//        for(int i = 1; i < killer.length; i++){
+//            if(killer[i] == -1)
+//                continue;
+//            if(killer[i-1] > killer[i]){
+//                flag = true;
+//            }
+//        }
+//        return flag;
+//    }
+//public class Main {
+//    public static void main(String[] args) {
+//        //input
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int[] nums = new int[n];//存储输入的数组
+//        for(int i = 0; i < n; i++){
+//            nums[i] = sc.nextInt();
+//
+//        }
+//        int result = -1000;
+//        for(int i = 0; i < nums.length-1; i++){
+//            int minSum = FrontMinSum(nums, i);
+//            int maxSum = AfterMaxSum(nums, i);
+//            int temp = maxSum - minSum;
+//            if(result < temp){
+//                result = temp;
+//            }
+//        }
+//        System.out.println(result);
+//    }
+//    //下标index之前数的最小和
+//    private static int FrontMinSum(int[] nums, int index){
+//        if(index == 0 || index == 1){
+//            return 0;
+//        }
+//        int minSum = 0;
+//        for(int i = index-1; i > 0; i--){
+//            int temp = minSum + nums[i];
+//            if(temp < minSum){
+//                minSum = temp;
+//            }
+//        }
+//        return minSum;
+//    }
+//    //下标index及其之后数的最大和
+//    private static int AfterMaxSum(int[] nums, int index){
+//        if(index == nums.length-1){
+//            return nums[index];
+//        }
+//        int maxSum = nums[index];
+//        for(int i = index+1; i <= nums.length-1; i++){
+//            int temp = maxSum + nums[i];
+//            if(temp > maxSum){
+//                maxSum = temp;
+//            }
+//        }
+//        return maxSum;
+//    }
+//
+//    public static void main(String[] args) {
+//        Scanner s1 = new Scanner(System.in);
+//        String Left1_1 = s1.next();
+//        String Left2_1 = s1.next();
+//        Scanner s2 = new Scanner(System.in);
+//        String right1_1 = s2.next();
+//        System.out.println(Left1_1 +"+"+ Left2_1+"="+right1_1);
+//
+//        Scanner s3 = new Scanner(System.in);
+//        String Left1_2 = s3.next();
+//        String Left2_2 = s3.next();
+//        Scanner s4 = new Scanner(System.in);
+//        String right1_2 = s4.next();
+//        String right2_2 = s4.next();
+//        System.out.println(Left1_2 +"-"+ Left2_2+"="+right1_2+"+"+right2_2);
+//
+//        double x,y;
+//        for(x=1;x<100;x++){
+//            for(y=1;y<100;y++){
+//                if( (3*x+2*y) == 10 && (4*x - y)==(4+y)){
+//                    System.out.println(x+" "+y);
+//                }
+//            }
+//        }
+//    }
+//    public static void main(String[] args) {
+//        ArrayList<Integer> numes = new ArrayList<>();
+//        Scanner sc = new Scanner(System.in);
+//        numes.add(sc.nextInt());
+//        while(sc.hasNextLine()){
+//            Scanner s = new Scanner(System.in);
+//            int a = s.nextInt();
+//            if(a != 0)
+//                numes.add(a);
+//            if(a == -1){
+//                break;
+//            }
+//            int b = s.nextInt();
+//            if(b == -1){
+//                break;
+//            }
+//            if(b != 0){
+//                for(int j =a+1; j<=b;j++){
+//                    numes.add(j);
+//                }
+//            }
+//        }
+//        System.out.println(numes);
+//        int left =0;
+//        int right = left+1;
+//        int count = 1;
+//        while(right<numes.size()){
+//            if(numes.get(right)-numes.get(left) ==1){
+//                right++;
+//                left++;
+//                count ++;
+//            }else {
+//                right++;
+//                left++;
+//                count=1;
+//            }
+//        }
+//        System.out.println(count);
+//    }
+//}

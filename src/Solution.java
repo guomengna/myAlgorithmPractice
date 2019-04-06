@@ -1,3 +1,5 @@
+import com.sun.deploy.util.SyncAccess;
+import org.omg.CORBA.ARG_IN;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.sql.Array;
@@ -1062,5 +1064,159 @@ public class Solution {
         }
         return Math.max(getHigh(root.left), getHigh(root.right))+1;
     }
+
+    /**
+     * 二维数组中的查找
+     * @param target
+     * @param array
+     * @return
+     */
+    public boolean Find(int target, int [][] array) {
+        if(array.length == 0 || (array.length ==1 && array[array.length-1].length == 0)){
+            System.out.println("false");
+            return false;
+        }
+        int[] tempMin = new int[array.length];
+        int[] tempMax = new int[array.length];
+        for(int i = 0; i < array.length; i++){
+            tempMin[i] = array[i][0];
+            tempMax[i] = array[i][array[i].length-1];
+        }
+        for(int i = 0; i < tempMin.length; i++){
+            if(tempMin[i] <= target || tempMax[i] >= target){
+                int result = binearySearch(array[i], target);
+                if(result != -1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int binearySearch(int[] a, int target){
+       int left = 0;
+       int right = a.length-1;
+       while(left <= right){
+           int mid = (left + right)/2;
+           if(a[mid] == target){
+               return mid;
+           }else if(a[mid] > target){
+               right = mid - 1;
+           }else {
+               left = mid + 1;
+           }
+       }
+       return -1;
+    }
+
+    /**
+     * 剑指offer 2
+     * 将一个字符串中的每个空格替换成“%20”
+     * @param str
+     * @return
+     */
+    public String replaceSpace(StringBuffer str) {
+        int point = 0;
+        System.out.println("str.length() = "+str.length());
+        while(point < str.length()){
+            if(String.valueOf(str.charAt(point)).equals(" ")){
+                str.insert(point,"%20");
+                point += 3;
+                str.deleteCharAt(point);
+            }else {
+                point += 1;
+            }
+        }
+        System.out.println(str);
+        return str.toString();
+    }
+
+    /**
+     * 剑指offer 3
+     * 输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。
+     * @param listNode
+     * @return
+     */
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+//        ArrayList<Integer> temp = getListNode(listNode);
+        ArrayList<Integer> result = new ArrayList<>();
+//        if(temp.size() <= 1){
+//            return temp;
+//        }
+//        for(int i = temp.size()-1; i>=0; i--){
+//            result.add(temp.get(i));
+//        }
+//        return result;
+        ListNode newHead = reverseListNode(listNode);
+        while(newHead != null){
+            result.add(newHead.val);
+            newHead = newHead.next;
+        }
+        return result;
+    }
+
+    public ListNode reverseListNode(ListNode head){
+        ListNode pre = null;
+        ListNode current = head;
+        while(current != null){
+            ListNode next = current.next;
+            current.next = pre;
+            pre = current;
+            current = next;
+        }
+        return pre;
+    }
+    public ArrayList<Integer> getListNode(ListNode head){
+        if(head == null){
+            return new ArrayList<>();
+        }
+        ArrayList<Integer> temp = new ArrayList<>();
+        temp.add(head.val);
+        while(head.next != null){
+            getListNode(head.next);
+        }
+        return temp;
+    }
+
+    /**
+     * 剑指offer 4
+     * 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。
+     * 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+     * @param pre
+     * @param in
+     * @return
+     */
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        TreeNode root = reConstructBinaryTree(pre, 0, pre.length-1, in, 0, in.length-1);
+        return root;
+    }
+    private TreeNode reConstructBinaryTree(int [] pre,int startPre,int endPre,int [] in,int startIn,int endIn) {
+        if(startPre>endPre||startIn>endIn)
+            return null;
+        TreeNode root=new TreeNode(pre[startPre]);
+        for(int i=startIn;i<=endIn;i++)
+            if(in[i]==pre[startPre]){
+                root.left=reConstructBinaryTree(pre,startPre+1,startPre+i-startIn,in,startIn,i-1);
+                root.right=reConstructBinaryTree(pre,i-startIn+startPre+1,endPre,in,i+1,endIn);
+                break;
+            }
+        return root;
+    }
+
+    /**
+     * 剑指offer 5
+     * 用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型
+     */
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+    public void push(int node) {
+
+    }
+//    public int pop() {
+//
+//    }
+
+
+
 }
 
