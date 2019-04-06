@@ -232,4 +232,21 @@ public class Niuke2018 {
         }
         System.out.print(b.get(n-1));
     }
+    //网易 独立生存
+    public void livingByOwn(){
+        Scanner sc = new Scanner(System.in);
+        int x = sc.nextInt();
+        int f = sc.nextInt();
+        int d = sc.nextInt();
+        int p = sc.nextInt();
+        int count = 0;
+        if(d > f*x){
+            count = f;
+            d -= f*x;
+            count += d/(x+p);
+        }else{
+            count = d/x;
+        }
+        System.out.println(count);
+    }
 }
