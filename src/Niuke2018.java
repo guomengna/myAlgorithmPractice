@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -192,5 +193,43 @@ public class Niuke2018 {
             }
         }
         System.out.println(max);
+    }
+    //网易 操作序列
+    public void operateList(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for(int i = 0; i < n; i++){
+            nums[i] = sc.nextInt();
+        }
+        ArrayList<Integer> b = new ArrayList<>();
+        if(n % 2 == 1){
+            for(int i = n-1; i >= 0; i--){
+                if(i%2 == 0){
+                    b.add(nums[i]);
+                }
+            }
+            for(int i = 0; i <= n-1; i++){
+                if(i % 2 == 1){
+                    b.add(nums[i]);
+                }
+            }
+        }else if(n % 2 == 0){
+            for(int i = n-1; i >= 0; i--){
+                if(i % 2 == 1){
+                    b.add(nums[i]);
+                }
+            }
+            for(int i = 0; i <= n-1; i++){
+                if(i % 2 == 0){
+                    b.add(nums[i]);
+                }
+            }
+        }
+        //打印
+        for(int i = 0; i < n-1; i++){
+            System.out.print(b.get(i) + " ");
+        }
+        System.out.print(b.get(n-1));
     }
 }

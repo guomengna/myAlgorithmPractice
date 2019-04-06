@@ -7,7 +7,8 @@ import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-       TestSolution testSolution = new TestSolution();
+        TestSolution testSolution = new TestSolution();
+
 //        Scanner sc = new Scanner(System.in);
 //        ArrayList<String> arrayList = new ArrayList<>();
 //        HashSet<String> hashSet = new HashSet<>();
