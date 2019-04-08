@@ -249,4 +249,61 @@ public class Niuke2018 {
         }
         System.out.println(count);
     }
+
+    //疯狂队列 通过0.0%
+    public void crazyQuery(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] h = new int[n];
+        for(int i = 0; i < n; i++){
+            h[i] = sc.nextInt();
+        }
+        ArrayList<Integer> a = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            for(int j = i; j < n; j++){
+                if(h[j] > h[i]){
+                    int temp = h[j];
+                    h[j] = h[i];
+                    h[i] = temp;
+                }
+            }
+        }
+        for(int i = 0; i+1 < n; i++){
+            if(h[i+1] == h[i]){
+                a.add(i+1);
+            }
+        }
+        System.out.println("a.size() = "+a.size());
+        int i = 0;
+        int j = n-1;
+        ArrayList<Integer> b = new ArrayList<>();
+        while(i < j){
+            b.add(h[i]);
+            System.out.println(h[i]);
+            for(int k = 0; k < a.size(); k++){
+                if(j == a.get(k)){
+                    j--;
+                }
+            }
+            b.add(h[j]);
+            System.out.println(h[j]);
+            i++;
+            j--;
+        }
+        ArrayList<Integer> b1 = b;
+        ArrayList<Integer> b2 = b;
+        for(int k = 0; k < a.size(); k++){
+            b1.add(0, h[a.get(k)]);
+            b2.add(h[a.get(k)]);
+        }
+        int total1 = 0;
+        for(int k = 0; k < b1.size()-1; k++){
+            total1 += Math.abs(b1.get(k+1) - b1.get(k));
+        }
+        int total2 = 0;
+        for(int k = 0; k < b2.size()-1; k++){
+            total2 += Math.abs(b2.get(k+1) - b2.get(k));
+        }
+        System.out.println(Math.max(total1,total2));
+    }
 }
