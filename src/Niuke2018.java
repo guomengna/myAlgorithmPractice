@@ -250,39 +250,126 @@ public class Niuke2018 {
         System.out.println(count);
     }
 
-    //疯狂队列 通过10%
-    public void crazyQuery(){
+    //循环数比较大小 100%
+    public void loopNumber(){
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        //将从控制台读取的数字存放在h中
-        int[] h = new int[n];
-        for(int i = 0; i < n; i++){
-            h[i] = sc.nextInt();
-        }
-        //将站好的疯狂队列存在a中
-        ArrayList<Integer> a = new ArrayList<>();
-        a.add(h[0]);
-        //i代表站队已经站好的人数
-        for(int i = 1; i < n; i++){
-            int maxMinus = 0;
-            int index = 0;
-            for(int j = 0; j < n; j++){
-                if(h[j] != 0){
-                    int minus = Math.abs(h[j] - a.get(i-1));
-                    if(minus > maxMinus){
-                        maxMinus = minus;
-                        index = j;
-                    }
-                }
+        String x1 = sc.next();
+        int k1 = sc.nextInt();
+        String x2 = sc.next();
+        int k2 = sc.nextInt();
+        String res1 = "";
+        String res2 = "";
+        int size1 = x1.length()*k1;
+        int size2 = x2.length()*k2;
+        if(size1 > size2){
+            System.out.println("Greater");
+            return;
+        }else if(size1 < size2){
+            System.out.println("Less");
+            return;
+        }else{
+            int size = x1.length() * k1;
+            for(int i = 0; i < k1; i++){
+                res1 += x1;
             }
-            a.add(h[index]);
-            h[index] = 0;
-        }
+            for(int i = 0; i < k2; i++){
+                res2 += x2;
+            }
+            for(int i = 0; i < size; i++){
+                int v1 = (int)res1.charAt(i);
+                int v2 = (int)res2.charAt(i);
+                if(v1 > v2){
+                    System.out.println("Greater");
+                    return;
+                }
+                if(v1 < v2){
+                    System.out.println("Less");
+                    return;
+                }
 
-        int res = 0;
-        for(int i = 0; i+1 < n; i++){
-            res += Math.abs(a.get(i+1) - a.get(i));
+            }
+            System.out.println("Equal");
+            return;
         }
-        System.out.println(res);
     }
+    //DNA序列
+    public void DNA(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        if(s.length() < 4){
+            System.out.println(1);
+            return;
+        }
+        HashMap<Character, Integer> map1 = new HashMap<>();
+        for(int i = 0; i < s.length(); i++){
+            if(map1.containsKey(s.charAt(i))){
+                map1.put(s.charAt(i), map1.get(s.charAt(i))+1);
+            }else{
+                map1.put(s.charAt(i), 1);
+            }
+        }
+        if(map1.size() < 4){
+            System.out.println(1);
+            return;
+        }
+        HashMap<String, Integer> map2 = new HashMap<>();
+        for(int i = 0; i+1 < s.length(); i++){
+            String temp = String.valueOf(s.charAt(i))+String.valueOf(s.charAt(i+1));
+            if(map2.containsKey(temp)){
+                map2.put(temp, map2.get(temp)+1);
+            }else{
+                map2.put(temp, 1);
+            }
+        }
+        if(map2.size() < 16){
+            System.out.println(2);
+            return;
+        }
+        HashMap<String, Integer> map3 = new HashMap<>();
+        for(int i = 0; i+2 < s.length(); i++){
+            String temp = String.valueOf(s.charAt(i))+String.valueOf(s.charAt(i+1))
+                    +String.valueOf(s.charAt(i+2));
+            if(map3.containsKey(temp)){
+                map3.put(temp, map3.get(temp)+1);
+            }else{
+                map3.put(temp, 1);
+            }
+        }
+        if(map3.size() < 64){
+            System.out.println(3);
+            return;
+        }
+        HashMap<String, Integer> map4 = new HashMap<>();
+        for(int i = 0; i+3 < s.length(); i++){
+            String temp = String.valueOf(s.charAt(i))+String.valueOf(s.charAt(i+1))
+                    +String.valueOf(s.charAt(i+2))+String.valueOf(s.charAt(i+3));
+            if(map4.containsKey(temp)){
+                map4.put(temp, map4.get(temp)+1);
+            }else{
+                map4.put(temp, 1);
+            }
+        }
+        if(map4.size() < 256){
+            System.out.println(4);
+            return;
+        }
+        HashMap<String, Integer> map5 = new HashMap<>();
+        for(int i = 0; i+4 < s.length(); i++){
+            String temp = String.valueOf(s.charAt(i))+String.valueOf(s.charAt(i+1))
+                    +String.valueOf(s.charAt(i+2))+String.valueOf(s.charAt(i+3))
+                    +String.valueOf(s.charAt(i+4));
+            if(map5.containsKey(temp)){
+                map5.put(temp, map5.get(temp)+1);
+            }else{
+                map5.put(temp, 1);
+            }
+        }
+        if(map5.size() < 256*4){
+            System.out.println(5);
+            return;
+        }
+        System.out.println(6);
+    }
+
+
 }
