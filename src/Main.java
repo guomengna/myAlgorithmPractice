@@ -8,7 +8,51 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         TestSolution testSolution = new TestSolution();
-
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        //将从控制台读取的数字存放在h中
+        int[] h = new int[n];
+        for(int i = 0; i < n; i++){
+            h[i] = sc.nextInt();
+        }
+        for(int i = 0; i < n; i++){
+            for(int j = i; j < n; j++){
+                if(h[j] < h[i]){
+                    int temp = h[j];
+                    h[j] = h[i];
+                    h[i] = temp;
+                }
+            }
+        }
+        //将站好的疯狂队列存在a中
+        ArrayList<Integer> a = new ArrayList<>();
+        a.add(h[0]);
+        h[0] = 0;
+        //i代表站队已经站好的人数
+        for(int i = 1; i < n; i++){
+            int maxMinus = -1;
+            int index = 0;
+            for(int j = 0; j < n; j++){
+                System.out.println("h["+j+"] = "+h[j]);
+                if(h[j] != 0){
+                    int minus = Math.abs(h[j] - a.get(i-1));
+                    if(minus > maxMinus){
+                        maxMinus = minus;
+                        index = j;
+                    }
+                }
+            }
+            a.add(h[index]);
+            h[index] = 0;
+        }
+        for(int i = 0; i < a.size(); i++){
+            System.out.println(a.get(i));
+        }
+        int res = 0;
+        for(int i = 0; i+1 < n; i++){
+            res += Math.abs(a.get(i+1) - a.get(i));
+        }
+        System.out.println(res);
 //        Scanner sc = new Scanner(System.in);
 //        ArrayList<String> arrayList = new ArrayList<>();
 //        HashSet<String> hashSet = new HashSet<>();

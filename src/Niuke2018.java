@@ -250,60 +250,39 @@ public class Niuke2018 {
         System.out.println(count);
     }
 
-    //疯狂队列 通过0.0%
+    //疯狂队列 通过10%
     public void crazyQuery(){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
+        //将从控制台读取的数字存放在h中
         int[] h = new int[n];
         for(int i = 0; i < n; i++){
             h[i] = sc.nextInt();
         }
+        //将站好的疯狂队列存在a中
         ArrayList<Integer> a = new ArrayList<>();
-        for(int i = 0; i < n; i++){
-            for(int j = i; j < n; j++){
-                if(h[j] > h[i]){
-                    int temp = h[j];
-                    h[j] = h[i];
-                    h[i] = temp;
+        a.add(h[0]);
+        //i代表站队已经站好的人数
+        for(int i = 1; i < n; i++){
+            int maxMinus = 0;
+            int index = 0;
+            for(int j = 0; j < n; j++){
+                if(h[j] != 0){
+                    int minus = Math.abs(h[j] - a.get(i-1));
+                    if(minus > maxMinus){
+                        maxMinus = minus;
+                        index = j;
+                    }
                 }
             }
+            a.add(h[index]);
+            h[index] = 0;
         }
+
+        int res = 0;
         for(int i = 0; i+1 < n; i++){
-            if(h[i+1] == h[i]){
-                a.add(i+1);
-            }
+            res += Math.abs(a.get(i+1) - a.get(i));
         }
-        System.out.println("a.size() = "+a.size());
-        int i = 0;
-        int j = n-1;
-        ArrayList<Integer> b = new ArrayList<>();
-        while(i < j){
-            b.add(h[i]);
-            System.out.println(h[i]);
-            for(int k = 0; k < a.size(); k++){
-                if(j == a.get(k)){
-                    j--;
-                }
-            }
-            b.add(h[j]);
-            System.out.println(h[j]);
-            i++;
-            j--;
-        }
-        ArrayList<Integer> b1 = b;
-        ArrayList<Integer> b2 = b;
-        for(int k = 0; k < a.size(); k++){
-            b1.add(0, h[a.get(k)]);
-            b2.add(h[a.get(k)]);
-        }
-        int total1 = 0;
-        for(int k = 0; k < b1.size()-1; k++){
-            total1 += Math.abs(b1.get(k+1) - b1.get(k));
-        }
-        int total2 = 0;
-        for(int k = 0; k < b2.size()-1; k++){
-            total2 += Math.abs(b2.get(k+1) - b2.get(k));
-        }
-        System.out.println(Math.max(total1,total2));
+        System.out.println(res);
     }
 }
