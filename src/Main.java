@@ -8,7 +8,9 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         TestSolution testSolution = new TestSolution();
-        HashMap<Character, Integer> map1 = new HashMap();
+        TestProduce testProduce = new TestProduce();
+        testProduce.test();
+
 //        Scanner sc = new Scanner(System.in);
 //        int n = sc.nextInt();
 //        //将从控制台读取的数字存放在h中
