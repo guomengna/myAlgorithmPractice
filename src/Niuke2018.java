@@ -417,4 +417,27 @@ public class Niuke2018 {
         System.out.println(res);
     }
 
+    //空中飞行
+    public void flyInSky(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int s = sc.nextInt();
+        int[] f = new int[n];
+        for(int i = 0; i < n; i++){
+            f[i] = sc.nextInt();
+        }
+
+        int i = 0;
+        int count = 0;
+        while(s > 0 && i < n){
+            if(s >= f[i]){
+                count ++;
+                s -= f[i];
+                i++;
+            }else{
+                break;
+            }
+        }
+        System.out.println(count);
+    }
 }
