@@ -371,5 +371,32 @@ public class Niuke2018 {
         System.out.println(6);
     }
 
+    //求猜做判断题的最大得分
+    public void maxScore(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int t = sc.nextInt();
+        int a = sc.nextInt();
+        int score1 = 0; // 猜对的为“正确”的题目
+        int score2 = 0; // 猜对的为“错误”的题目
+        if(t == a){
+            System.out.println(n);
+            return;
+        }
+        if(t > a){
+            score1 = a;
+            int actWrong = n - a;//实际答案为“错误”的题目数量
+            score2 = actWrong - (t - a);
+            System.out.println(score1 + score2);
+            return;
+        }
+        if(t < a){
+            score1 = t;
+            int actWrong = n - a;
+            score2 = actWrong;
+            System.out.println(score1 + score2);
+            return;
+        }
+    }
 
 }
