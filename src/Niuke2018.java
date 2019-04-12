@@ -399,4 +399,22 @@ public class Niuke2018 {
         }
     }
 
+    //去掉重复的字符
+    public void deleteRepeatLetters(){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        int[] letters = new int[26];
+        for(int i = 0; i < 26; i++){
+            letters[i] = -1;
+        }
+        String res = "";
+        for(int i = 0; i < str.length(); i++){
+            if(letters[str.charAt(i) - 97] == -1){
+                letters[str.charAt(i) - 97] = i;
+                res += String.valueOf(str.charAt(i));
+            }
+        }
+        System.out.println(res);
+    }
+
 }
