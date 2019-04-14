@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Niuke2018 {
@@ -514,5 +515,50 @@ public class Niuke2018 {
             }
         }
         System.out.println(count);
+    }
+    // 字符串的价值
+    public void valueOfString(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int k = sc.nextInt();
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < s.length(); i++){
+            if(map.containsKey(s.charAt(i))){
+                map.put(s.charAt(i), map.get(s.charAt(i))+1);
+            }else{
+                map.put(s.charAt(i), 1);
+            }
+        }
+        ArrayList<Integer> list = new ArrayList<>();
+        Iterator it = map.values().iterator();
+        while(it.hasNext()){
+            list.add(Integer.parseInt(it.next().toString()));
+        }
+        int[] l = new int[list.size()];
+        for(int i = 0; i < list.size(); i++){
+            l[i] = list.get(i);
+        }
+        l = sort1(l);
+        for(int i = 0; i < k; i++){
+            l[0] = l[0] - 1;
+            l = sort1(l);
+        }
+        int res = 0;
+        for(int i = 0; i < l.length; i++){
+            res += l[i] * l[i];
+        }
+        System.out.println(res);
+    }
+    public int[] sort1(int[] l){
+        for(int i = 0; i < l.length; i++){
+            for(int j = i; j < l.length; j++){
+                if(l[j] > l[i]){
+                    int t = l[j];
+                    l[j] = l[i];
+                    l[i] = t;
+                }
+            }
+        }
+        return l;
     }
 }
