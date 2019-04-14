@@ -485,4 +485,34 @@ public class Niuke2018 {
             return false;
         }
     }
+
+    //将序列排序为非严格升序，问最少需要多少移位
+    public void sort(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        int[] tp = new int[n];
+        for(int i = 0; i < n; i++){
+            int t = sc.nextInt();
+            nums[i] = t;
+            tp[i] = t;
+        }
+
+        for(int i = 0; i < n; i++){
+            for(int j = i; j < n; j++){
+                if(nums[i] > nums[j]){
+                    int temp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = temp;
+                }
+            }
+        }
+        int count = 0;
+        for(int i = 0; i < n; i++){
+            if(nums[i] != tp[i]){
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
 }
