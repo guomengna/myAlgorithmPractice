@@ -440,4 +440,49 @@ public class Niuke2018 {
         }
         System.out.println(count);
     }
+
+    //回文素数 值得注意的是0和1要单独讨论，更值得注意的是1不是素数
+    public void huiWenSushu(){
+        int count = 0;
+        Scanner sc = new Scanner(System.in);
+        int l = sc.nextInt();
+        int r = sc.nextInt();
+        if(l > r){
+            System.out.println(0);
+            return;
+        }
+        for(int i = l; i <= r; i++){
+            if(isSu(i) && isHuiWen(i)){
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+    public static boolean isSu(int n){
+        if(n == 0 || n == 1){
+            return false;
+        }
+        for(int i = 2; i < n; i++){
+            if(i != n && n % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    public static boolean isHuiWen(int n){
+        String str = String.valueOf(n);
+        if(str.length() == 1){
+            return true;
+        }
+        String temp = "";
+        for(int i = str.length()-1; i >= 0; i--){
+            temp += str.charAt(i);
+        }
+        int res = Integer.parseInt(temp);
+        if(n == res){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

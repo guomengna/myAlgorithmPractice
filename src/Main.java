@@ -7,8 +7,6 @@ import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-        TestSolution testSolution = new TestSolution();
-
 
 //        Scanner sc = new Scanner(System.in);
 //        int n = sc.nextInt();
@@ -89,6 +87,8 @@ public class Main {
 //            System.out.println(arrayList.get(i));
 //        }
     }
+
+
     // 按照字典序排序字符串数组
     public static String[] getUrlParam(String[] keys){
         for (int i = 0; i < keys.length - 1; i++) {
@@ -141,6 +141,8 @@ public class Main {
         }
         return String.valueOf(a);
     }
+
+
 //
 
 //        Scanner sc = new Scanner(System.in);
