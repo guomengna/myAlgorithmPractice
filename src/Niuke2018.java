@@ -516,6 +516,7 @@ public class Niuke2018 {
         }
         System.out.println(count);
     }
+
     // 字符串的价值
     public void valueOfString(){
         Scanner sc = new Scanner(System.in);
@@ -561,4 +562,16 @@ public class Niuke2018 {
         }
         return l;
     }
+    //拼凑正方形 最长的边-最短的边 + 第二长的边-第二短的边
+    public void makeSquare(){
+        Scanner sc = new Scanner(System.in);
+        int[] t = new int[4];
+        for(int i = 0; i < 4; i++){
+            t[i] = sc.nextInt();
+        }
+        t = sort1(t);
+        int res = t[0] - t[3] + t[1] - t[2];
+        System.out.println(res);
+    }
+
 }
