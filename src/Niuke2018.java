@@ -573,5 +573,20 @@ public class Niuke2018 {
         int res = t[0] - t[3] + t[1] - t[2];
         System.out.println(res);
     }
-
+    // 区间表达
+    public void qujian(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for(int i = 0; i < n; i++){
+            nums[i] = sc.nextInt();
+        }
+        int count = 1;
+        for(int i = 0; i+1 < n; i++){
+            if(nums[i]+1 < nums[i+1]){
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
 }
