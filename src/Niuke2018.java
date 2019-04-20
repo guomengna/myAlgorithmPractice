@@ -639,5 +639,27 @@ public class Niuke2018 {
         return temp;
     }
 
+    //红和绿
+    public void redAndGreen(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int min = s.length();
+        for(int i = 0; i < s.length(); i++){
+            int count = 0;
+            for(int j = 0; j < i; j++){
+                if(s.charAt(j) != 'R'){
+                    count++;
+                }
+            }
+            for(int j = i+1; j < s.length(); j++){
+                if(s.charAt(j) != 'G'){
+                    count++;
+                }
+            }
+            min = Math.min(count,min);
+        }
+        System.out.println(min);
+    }
+
 
 }
