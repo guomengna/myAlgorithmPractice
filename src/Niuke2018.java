@@ -589,4 +589,55 @@ public class Niuke2018 {
         }
         System.out.println(count);
     }
+
+    //数字游戏
+    public void numsPlay(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for(int i = 0; i < n; i++){
+            nums[i] = sc.nextInt();
+        }
+        int[] reverseNums = new int[n];
+        for(int i = 0; i < n; i++){
+            String s = String.valueOf(nums[i]);
+            String temp = "";
+            s = sortString(s);
+            if(s.charAt(s.length()-1) == '0'){
+                temp = s.substring(1, s.length());
+            }else{
+                temp = s;
+            }
+            reverseNums[i] = Integer.parseInt(temp);
+        }
+        int max = 0;
+        for(int i = 0; i < n; i++){
+            if(reverseNums[i] > max){
+                max = reverseNums[i];
+            }
+        }
+        System.out.println(max);
+    }
+    public String sortString(String s){
+        String temp = "";
+        int nums[] = new int[s.length()];
+        for(int i = 0; i < s.length(); i++){
+            nums[i] = Integer.parseInt(String.valueOf(s.charAt(i)));
+        }
+        for(int i = 0; i < nums.length; i++){
+            for(int j = i+1; j < nums.length; j++){
+                if(nums[j] < nums[i]){
+                    int t = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = t;
+                }
+            }
+        }
+        for(int i = 0; i < nums.length; i++){
+            temp += nums[i] + "";
+        }
+        return temp;
+    }
+
+
 }

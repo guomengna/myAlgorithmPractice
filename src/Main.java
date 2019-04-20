@@ -7,7 +7,9 @@ import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-
+        Niuke2018 niuke2018 = new Niuke2018();
+        niuke2018.numsPlay();
+//        niuke2018.sortString("9638");
 
 //        Scanner sc = new Scanner(System.in);
 //        int n = sc.nextInt();
