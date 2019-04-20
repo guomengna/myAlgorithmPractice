@@ -661,5 +661,31 @@ public class Niuke2018 {
         System.out.println(min);
     }
 
-
+    //形成三角形 30%
+    public void createTriangle(){
+        Scanner sc = new Scanner(System.in);
+        int[] nums = new int[3];
+        nums[0] = sc.nextInt();
+        nums[1] = sc.nextInt();
+        nums[2] = sc.nextInt();
+        for(int i = 0; i < 3; i++){
+            for(int j = i; j < 3; j++){
+                if(nums[i] > nums[j]){
+                    int t = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = t;
+                }
+            }
+        }
+        int a = nums[0];
+        int b = nums[1];
+        int c = nums[2];
+        if(a + b > c && c - b < a && c - a < b){
+            System.out.println(a + b + c);
+            return;
+        }
+        c = c - (a + b) - 1;
+        System.out.println(a + b + c);
+        return;
+    }
 }
