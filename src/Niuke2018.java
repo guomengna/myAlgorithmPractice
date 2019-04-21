@@ -724,5 +724,24 @@ public class Niuke2018 {
         System.out.println("Equal");
     }
 
-
+    public void eatingGrass(){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        int nums[] = new int[t];
+        for(int i = 0; i < t; i++){
+            nums[i] = sc.nextInt();
+        }
+        for(int i = 0; i < t; i++){
+            System.out.println(winner(nums[i]));
+        }
+    }
+    public String winner(int num){
+        String s = "";
+        if(num % 5 == 1 || num % 5 == 3 || num % 5 == 4){
+            s = "niu";
+        }else if(num % 5 == 2 || num % 5 == 0){
+            s = "yang";
+        }
+        return s;
+    }
 }
