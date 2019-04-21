@@ -661,7 +661,7 @@ public class Niuke2018 {
         System.out.println(min);
     }
 
-    //形成三角形 30%
+    //形成三角形
     public void createTriangle(){
         Scanner sc = new Scanner(System.in);
         int[] nums = new int[3];
@@ -680,11 +680,11 @@ public class Niuke2018 {
         int a = nums[0];
         int b = nums[1];
         int c = nums[2];
-        if(a + b > c && c - b < a && c - a < b){
+        if(c - b < a && c - a < b){
             System.out.println(a + b + c);
             return;
         }
-        c = c - (a + b) - 1;
+        c = c - (c - (a + b) + 1);
         System.out.println(a + b + c);
         return;
     }
