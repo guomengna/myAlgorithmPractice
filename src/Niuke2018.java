@@ -688,4 +688,41 @@ public class Niuke2018 {
         System.out.println(a + b + c);
         return;
     }
+
+    public void recycleNums(){
+        Scanner sc = new Scanner(System.in);
+        int x1 = sc.nextInt();
+        int k1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int k2 = sc.nextInt();
+        int l1 = String.valueOf(x1).length() * k1;
+        int l2 = String.valueOf(x2).length() * k2;
+        if(l1 < l2){
+            System.out.println("Less");
+            return;
+        }else if(l1 > l2){
+            System.out.println("Greater");
+            return;
+        }
+        String s1 = "";
+        for(int i = 0; i < l1; i++){
+            s1 += x1+"";
+        }
+        String s2 = "";
+        for(int i = 0; i < l2; i++){
+            s2 += x2+"";
+        }
+        for(int i = 0; i < l1; i++){
+            if((int)s1.charAt(i) < (int)s2.charAt(i)){
+                System.out.println("Less");
+                return;
+            }else if((int)s1.charAt(i) > (int)s2.charAt(i)){
+                System.out.println("Greater");
+                return;
+            }
+        }
+        System.out.println("Equal");
+    }
+
+
 }
