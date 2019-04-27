@@ -744,4 +744,40 @@ public class Niuke2018 {
         }
         return s;
     }
+
+    /**
+     * 最长公共子串 动态规划
+     * dp[i][j] 存放的是以s1[i],s2[j]结尾的两个子串的最长公共子串的长度
+     */
+    public void maxSameSubString(){
+        Scanner sc = new Scanner(System.in);
+        String s1 = sc.nextLine();
+        String s2 = sc.nextLine();
+        int l1 = s1.length();
+        int l2 = s2.length();
+        if(l1 == 0 || l2 == 0){
+            System.out.println(0);
+            return;
+        }
+        int max = 0;
+        int[][] dp = new int[l1][l2];
+        for(int i = 0; i < l1; i ++){
+            for(int j =0 ; j < l2; j ++){
+                dp[i][j] = 0;
+            }
+        }
+        for(int i = 0; i < l1; i++){
+            for(int j = 0; j < l2; j++){
+                if(s1.charAt(i) == s2.charAt(j)){
+                    if(i == 0 || j == 0){
+                        dp[i][j] = 1;
+                    }else {
+                        dp[i][j] = dp[i-1][j-1] + 1;
+                    }
+                }
+                max = Math.max(dp[i][j], max);
+            }
+        }
+        System.out.println(max);
+    }
 }
