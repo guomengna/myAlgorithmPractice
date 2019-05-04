@@ -8,7 +8,11 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Niuke2018 niuke2018 = new Niuke2018();
-//        niuke2018.recycleNums();
+        int[] nums = {5,2,1,4,3};
+        ArrayList<Integer> num = new ArrayList<>();
+        num.add(1);
+        num.add(2);
+        niuke2018.sort(num);
 
 //        niuke2018.sortString("9638");
 

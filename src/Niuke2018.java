@@ -780,4 +780,68 @@ public class Niuke2018 {
         }
         System.out.println(max);
     }
+    public ArrayList<Integer> sort(ArrayList<Integer> array){
+        for(int i = 0; i < array.size(); i++){
+            for(int j = i; j < array.size(); j++){
+                if(array.get(i) < array.get(j)){
+                    int temp = array.get(i);
+                    array.set(i,array.get(j));
+                    array.set(j,temp);
+                }
+            }
+        }
+        System.out.println(array);
+        return array;
+    }
+    public ArrayList<ArrayList<Integer>> getSubnums(int[] nums){
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        int start = 0;
+        int end = -1;
+        for(int i = 0; i +1 < nums.length; i++){
+            if(nums[i] + 1 == nums[i+1]){
+                end = i+1;
+            }else{
+                ArrayList<Integer> array = new ArrayList<>();
+                for(int j = start; j <= end; j++){
+                    array.add(nums[j]);
+                }
+                if(array.size() >= 1){
+                    res.add(array);
+                }
+                start = i + 1;
+            }
+        }
+        ArrayList<Integer> array = new ArrayList<>();
+        for(int j = start; j <= end; j++){
+            array.add(nums[j]);
+        }
+        if(array.size() >= 1){
+            res.add(array);
+        }
+        start = 0;
+        end = -1;
+        for(int i = 0; i + 1 < nums.length; i++){
+            if(nums[i] - 1 == nums[i+1]){
+                end = i+1;
+            }else{
+                array = new ArrayList<>();
+                for(int j = start; j <= end; j++){
+                    array.add(nums[j]);
+                }
+                if(array.size() >= 1){
+                    res.add(array);
+                }
+                start = i + 1;
+            }
+        }
+        array = new ArrayList<>();
+        for(int j = start; j <= end; j++){
+            array.add(nums[j]);
+        }
+        if(array.size() >= 1){
+            res.add(array);
+        }
+//        System.out.println(res);
+        return res;
+    }
 }
