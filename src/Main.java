@@ -8,11 +8,11 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Niuke2018 niuke2018 = new Niuke2018();
-        int[] nums = {5,2,1,4,3};
-        ArrayList<Integer> num = new ArrayList<>();
-        num.add(1);
-        num.add(2);
-        niuke2018.sort(num);
+
+//        ArrayList<Integer> num = new ArrayList<>();
+//        num.add(1);
+//        num.add(2);
+//        niuke2018.sort(num);
 
 //        niuke2018.sortString("9638");
 
@@ -95,7 +95,6 @@ public class Main {
 //            System.out.println(arrayList.get(i));
 //        }
     }
-
 
     // 按照字典序排序字符串数组
     public static String[] getUrlParam(String[] keys){

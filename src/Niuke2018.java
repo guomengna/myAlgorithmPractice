@@ -844,4 +844,34 @@ public class Niuke2018 {
 //        System.out.println(res);
         return res;
     }
+
+    // 幸运子序列
+    public void luckySubSequence(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for(int i = 0; i < n; i++){
+            nums[i] = sc.nextInt();
+        }
+        int maxres = -1;
+        for(int i = 0; i < n; i++){
+            int m1 = nums[i];
+            for(int j = i; j < n; j++){
+                if(nums[j] > m1){
+                    int m2 = nums[j];
+                    maxres = Math.max(m1 ^ m2, maxres);
+                    break;
+                }
+            }
+            for(int j = i; j >= 0; j--){
+                if(nums[j] > m1){
+                    int m2 = nums[j];
+                    maxres = Math.max(m1 ^ m2, maxres);
+                    break;
+                }
+            }
+        }
+        System.out.println(maxres);
+    }
+
 }
