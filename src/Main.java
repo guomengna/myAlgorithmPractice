@@ -8,6 +8,21 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Niuke2018 niuke2018 = new Niuke2018();
+        long num = 564;
+        long l = 1;
+        long r = num;
+        while(l+1 < r){
+            long mid = (l+r)/2;
+            if(getsum(mid) == num){
+                System.out.println(mid);
+                return;
+            }else if(getsum(mid) > num){
+                r = mid;
+            }else{
+                l = mid;
+            }
+        }
+        System.out.println(-1);
 
 //        ArrayList<Integer> num = new ArrayList<>();
 //        num.add(1);
@@ -94,6 +109,14 @@ public class Main {
 //        for(int j = 0; j < arrayList.size(); j++){
 //            System.out.println(arrayList.get(i));
 //        }
+    }
+    public static long getsum(long num){
+        long sum = 0;
+        while(num != 0){
+            sum += num;
+            num = num / 10;
+        }
+        return sum;
     }
 
     // 按照字典序排序字符串数组

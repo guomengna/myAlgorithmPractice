@@ -890,5 +890,31 @@ public class Niuke2018 {
         add = stack.size() + add;
         System.out.println(add);
     }
-
+    //
+    public void lastPosition(){
+        Scanner sc = new Scanner(System.in);
+        long num = sc.nextLong();
+        long l = 1;
+        long r = num;
+        while(l+1 < r){
+            long mid = (l+r)/2;
+            if(getsum(mid) == num){
+                System.out.println(mid);
+                return;
+            }else if(getsum(mid) > num){
+                r = mid;
+            }else{
+                l = mid;
+            }
+        }
+        System.out.println(-1);
+    }
+    public long getsum(long num){
+        long sum = 0;
+        while(num != 0){
+            sum += num;
+            num = num / 10;
+        }
+        return sum;
+    }
 }
