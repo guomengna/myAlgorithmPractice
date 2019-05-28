@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Niuke2018 {
 
@@ -872,6 +869,26 @@ public class Niuke2018 {
             }
         }
         System.out.println(maxres);
+    }
+
+    //确实括号的数量
+    public void missParentheses(){
+        Stack<String> stack = new Stack<>();
+        String str = "(()(()";
+        int add = 0;
+        for(int i = 0; i < str.length(); i++){
+            if(str.charAt(i) == '('){
+                stack.push("(");
+            }else if(str.charAt(i) == ')'){
+                if(stack.isEmpty()){
+                    add++;
+                }else {
+                    stack.pop();
+                }
+            }
+        }
+        add = stack.size() + add;
+        System.out.println(add);
     }
 
 }
