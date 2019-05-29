@@ -917,4 +917,24 @@ public class Niuke2018 {
         }
         return sum;
     }
+
+    //深度括号匹配
+    public void deepkuohaomatch(){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        Stack<String> stack = new Stack<>();
+        int maxdeep = 0;
+        int td = 0;
+        for(int i = 0; i < str.length(); i++){
+            if(str.charAt(i) == '('){
+                stack.push("(");
+                td++;
+            }else if(str.charAt(i) == ')'){
+                maxdeep = Math.max(maxdeep, td);
+                td--;
+                stack.pop();
+            }
+        }
+        System.out.println(maxdeep);
+    }
 }
