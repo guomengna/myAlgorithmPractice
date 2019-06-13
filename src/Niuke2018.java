@@ -988,4 +988,28 @@ public class Niuke2018 {
         return true;
     }
 
+    public void returnStrings(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        String s1 = "";
+        for(int i = s.length()-1; i >= 0; i--){
+            s1 += String.valueOf(s.charAt(i));
+        }
+        int count = 0;
+        for(int i = 0; i < s.length(); i++){
+            if(ifpartSame(s.substring(i), s1) == true){
+                count = i;
+                break;
+            }
+        }
+        System.out.println(s.length() + count);
+    }
+    public boolean ifpartSame(String s, String s1){
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) != s1.charAt(i)){
+                return false;
+            }
+        }
+        return true;
+    }
 }
