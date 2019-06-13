@@ -1012,4 +1012,15 @@ public class Niuke2018 {
         }
         return true;
     }
+    // 疯狂序列
+    public void crazyNums(){
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        int i = 1;
+        while(n > 0){
+            n -= i;
+            i++;
+        }
+        System.out.println(i-1);
+    }
 }
