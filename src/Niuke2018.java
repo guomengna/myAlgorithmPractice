@@ -962,4 +962,30 @@ public class Niuke2018 {
         }
         return dp[s1.length()][s2.length()];
     }
+
+    // 两个子串
+    public void twoSubStrings(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        String s1 = "";
+        int count = 0;
+        for(int i = s.length()-1; i > 0; i--){
+            s1 = s.substring(i);
+            if(isSubFromHead(s,s1) == true){
+                count = s.length() - i;
+            }
+        }
+        String s2 = s.substring(count, s.length());
+        System.out.println(s+s2);
+    }
+
+    public boolean isSubFromHead(String s, String s1){
+        for(int i = 0; i < s1.length(); i++){
+            if(s1.charAt(i) != s.charAt(i)){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

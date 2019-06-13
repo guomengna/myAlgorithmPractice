@@ -7,38 +7,7 @@ import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = 2;
-        int[] pi = new int[n+1];
-        pi[0] = 0;
-        for(int i = 1; i <= n; i++){
-            pi[i] = sc.nextInt();
-        }
-        int[] count = new int[n+1];
-        count[0] = 0;
-        count[1] = 1;
-        for(int i = 2; i <= n; i++){
-            count[i] = 0;
-        }
-        int step = 0;
-        int index = 1;
-        while(index <= n){
-            if(count[index] % 2 == 0){
-                index++;
-                if(index > n){
-                    step++;
-                    break;
-                }else {
-                    count[index]++;
-                    step++;
-                }
-            }else{
-                index = pi[index];
-                count[index]++;
-                step++;
-            }
-        }
-        System.out.println(step);
+
 
 //        ArrayList<Integer> num = new ArrayList<>();
 //        num.add(1);
