@@ -7,7 +7,36 @@ import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        Stack<Character> st = new Stack<>();
+        ArrayList<Integer> a = new ArrayList<>();
+        int flag = 0;
+        int count = 1;
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == '('){
+                st.push('(');
+                flag = 1;
+            }else{
+                st.pop();
+                if(flag == 0){
+                    count++;
+                }else{
+                    a.add(count);
+                    count = 1;
+                }
+                flag = 0;
+            }
+        }
+        a.add(count);
+        int res = 1;
+        for(int i = 0; i < a.size(); i++){
+            int m = a.get(i);
+            for(int j = 1; j <= m; j++){
+                res *= j;
+            }
+        }
+        System.out.println(res);
 
 //        ArrayList<Integer> num = new ArrayList<>();
 //        num.add(1);

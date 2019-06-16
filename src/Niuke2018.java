@@ -1023,4 +1023,20 @@ public class Niuke2018 {
         }
         System.out.println(i-1);
     }
+
+    public void matchKuohao(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        Stack<Character> st = new Stack<>();
+        long re = 1;
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == '('){
+                st.push('(');
+            }else{
+                re *= st.size();
+                st.pop();
+            }
+        }
+        System.out.println(re);
+    }
 }
