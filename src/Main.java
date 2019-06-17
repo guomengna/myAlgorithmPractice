@@ -13,8 +13,6 @@ public class Main {
 //            System.out.println(k);
 //            fun(k);
 //        }
-        fun(103);
-
 //        ArrayList<Integer> num = new ArrayList<>();
 //        num.add(1);
 //        num.add(2);
@@ -101,6 +99,7 @@ public class Main {
 //            System.out.println(arrayList.get(i));
 //        }
     }
+
     public static void fun(int num){
         String s = num+"";
         if(s.length() <= 1){

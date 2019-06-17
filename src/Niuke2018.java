@@ -1061,4 +1061,40 @@ public class Niuke2018 {
             System.out.println(pages[i]);
         }
     }
+
+    //最小众倍数
+    public void minzhongbeishu(){
+        Scanner sc = new Scanner(System.in);
+        int[] nums = new int[5];
+        for(int i = 0; i < 5; i++){
+            nums[i] = sc.nextInt();
+        }
+        int n = nums.length;
+        int res = 1000000;
+        for(int i = 0 ; i < n; i++){
+            for(int j = i+1; j < n; j++){
+                int t = min(nums[i], nums[j]);
+                for(int k = j+1; k < n; k++){
+                    res = Math.min(min(t, nums[k]), res);
+                }
+            }
+        }
+        System.out.println(res);
+    }
+
+    public int min(int c, int d){
+        int a = c;
+        int b = d;
+        a = Math.max(c, d);
+        b = Math.min(c, d);
+        if(a == b){
+            return a;
+        }
+        while(b != 0){
+            int k = a % b;
+            a = b;
+            b = k;
+        }
+        return(c*d/a);
+    }
 }
