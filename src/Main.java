@@ -7,36 +7,13 @@ import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-        Stack<Character> st = new Stack<>();
-        ArrayList<Integer> a = new ArrayList<>();
-        int flag = 0;
-        int count = 1;
-        for(int i = 0; i < s.length(); i++){
-            if(s.charAt(i) == '('){
-                st.push('(');
-                flag = 1;
-            }else{
-                st.pop();
-                if(flag == 0){
-                    count++;
-                }else{
-                    a.add(count);
-                    count = 1;
-                }
-                flag = 0;
-            }
-        }
-        a.add(count);
-        int res = 1;
-        for(int i = 0; i < a.size(); i++){
-            int m = a.get(i);
-            for(int j = 1; j <= m; j++){
-                res *= j;
-            }
-        }
-        System.out.println(res);
+
+//        for(int k = 1; k <= 1000; k++){
+//            System.out.println("-------------------------------");
+//            System.out.println(k);
+//            fun(k);
+//        }
+        fun(103);
 
 //        ArrayList<Integer> num = new ArrayList<>();
 //        num.add(1);
@@ -124,7 +101,55 @@ public class Main {
 //            System.out.println(arrayList.get(i));
 //        }
     }
-
+    public static void fun(int num){
+        String s = num+"";
+        if(s.length() <= 1){
+            System.out.println(false);
+            return;
+        }else if(s.length() == 2){
+            if(Integer.parseInt(String.valueOf(s.charAt(0))) == Integer.parseInt(String.valueOf(s.charAt(1)))){
+                System.out.println(true);
+                return;
+            }else{
+                System.out.println(false);
+                return;
+            }
+        }else{
+            long total = 0;
+            for(int i = 0; i < s.length(); i ++){
+                total += Integer.parseInt(String.valueOf(s.charAt(i)));
+            }
+            if(total % 2 != 0){
+                System.out.println(false);
+                return;
+            }
+            char[] c = s.toCharArray();
+            for(int i = 0 ; i < c.length; i++){
+                for(int j = i; j < c.length; j++){
+                    if(c[j] < c[i]){
+                        char t = c[i];
+                        c[i] = c[j];
+                        c[j] = t;
+                    }
+                }
+            }
+            long target = total/2;
+            for(int i = 0; i < c.length; i++){
+                int re = Integer.parseInt(String.valueOf(c[i]));
+                for(int j = i+1; j < c.length; j++){
+                    re += Integer.parseInt(String.valueOf(c[j]));
+                    if(re == target){
+                        System.out.println(true);
+                        return;
+                    }else if(re > target){
+                        break;
+                    }
+                }
+            }
+        }
+        System.out.println(false);
+        return;
+    }
     public static long getsum(long num){
         long sum = 0;
         while(num != 0){

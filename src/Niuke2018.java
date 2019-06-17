@@ -1039,4 +1039,26 @@ public class Niuke2018 {
         }
         System.out.println(re);
     }
+
+    //数据分页说明
+    public void pages(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] pages = new int[n+1];
+        pages[0] = 0;
+        for(int i = 1; i <= n; i++){
+            pages[i] = sc.nextInt();
+        }
+        int page = sc.nextInt();
+        int num = sc.nextInt();
+        if((num * page + 1) > n){
+            System.out.println("超过分页范围");
+            return;
+        }
+        int start = num * page + 1;
+        int end = Math.min(num * (page+1), n);
+        for(int i = start; i <= end; i++){
+            System.out.println(pages[i]);
+        }
+    }
 }
