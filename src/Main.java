@@ -100,6 +100,24 @@ public class Main {
 //        }
     }
 
+
+    public static boolean sort(int a,int b){
+        String a1 = a+"";
+        String b1 = b+"";
+        int i = 0;
+        int j = 0;
+        while(i < a1.length() && j < b1.length()){
+            if(a1.charAt(i) > b1.charAt(j)) {
+                return true;
+            }else if(a1.charAt(i) < b1.charAt(j)){
+                return false;
+            }else {
+                i++;
+                j++;
+            }
+        }
+        return false;
+    }
     public static void fun(int num){
         String s = num+"";
         if(s.length() <= 1){

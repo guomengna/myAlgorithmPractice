@@ -1097,4 +1097,65 @@ public class Niuke2018 {
         }
         return(c*d/a);
     }
+
+    //数位重排
+    public void resortInt(){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for(int i = 0; i < t; i++){
+            int num = sc.nextInt();
+            if(ifMul(num) != true){
+                System.out.println("Impossible");
+            }else{
+                System.out.println("Possible");
+            }
+        }
+    }
+
+    public boolean ifMul(int num){
+        for(int i = 2; i <= 9; i++){
+            int n1 = num * i;
+            if(com(num,n1)==true){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //判断两个数中包含的数字是否相同
+    public static boolean com(int num, int n1){
+        HashMap<Character,Integer> ha1 = new HashMap<>();
+        HashMap<Character, Integer> ha2 = new HashMap<>();
+        String numS = num+"";
+        String n1S = n1+"";
+        for(int i = 0; i < numS.length();i++){
+            if(ha1.get(numS.charAt(i)) != null){
+                ha1.put(numS.charAt(i), ha1.get(numS.charAt(i))+1);
+            }else{
+                ha1.put(numS.charAt(i), 1);
+            }
+        }
+        for(int i = 0; i < n1S.length();i++){
+            if(ha2.get(n1S.charAt(i)) != null){
+                ha2.put(n1S.charAt(i), ha2.get(n1S.charAt(i))+1);
+            }else{
+                ha2.put(n1S.charAt(i), 1);
+            }
+        }
+        Iterator it1 = ha1.keySet().iterator();
+        Iterator it2 = ha1.keySet().iterator();
+        while(it1.hasNext()){
+            char key = it1.next().toString().charAt(0);
+            if(ha2.containsKey(key)){
+                if(ha1.get(key).equals(ha2.get(key))){
+                    continue;
+                }else {
+                    return false;
+                }
+            }else {
+                return false;
+            }
+        }
+        return true;
+    }
 }
