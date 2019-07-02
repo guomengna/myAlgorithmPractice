@@ -30,7 +30,7 @@ public class Test2019 {
             }
         }
     }
-
+    //计算相差几天
     public int differentDays(Date date1,Date date2)
     {
         Calendar cal1 = Calendar.getInstance();
@@ -65,6 +65,7 @@ public class Test2019 {
             return day2-day1;
         }
     }
+    //计算相差几天，用毫秒计算
     public int differentDaysByMillisecond(Date date1,Date date2)
     {
         int days = (int) ((date2.getTime() - date1.getTime()) / (1000*3600*24));
