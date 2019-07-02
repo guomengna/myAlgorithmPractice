@@ -4,102 +4,63 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 //import java.util.*;
 import javax.swing.text.html.HTMLDocument;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-//        for(int k = 1; k <= 1000; k++){
-//            System.out.println("-------------------------------");
-//            System.out.println(k);
-//            fun(k);
-//        }
-//        ArrayList<Integer> num = new ArrayList<>();
-//        num.add(1);
-//        num.add(2);
-//        niuke2018.sort(num);
-
-//        niuke2018.sortString("9638");
-
-//        Scanner sc = new Scanner(System.in);
-//        int n = sc.nextInt();
-//        //将从控制台读取的数字存放在h中
-//        int[] h = new int[n];
-//        for(int i = 0; i < n; i++){
-//            h[i] = sc.nextInt();
-//        }
-//        for(int i = 0; i < n; i++){
-//            for(int j = i; j < n; j++){
-//                if(h[j] < h[i]){
-//                    int temp = h[j];
-//                    h[j] = h[i];
-//                    h[i] = temp;
-//                }
-//            }
-//        }
-//        //将站好的疯狂队列存在a中
-//        ArrayList<Integer> a = new ArrayList<>();
-//        a.add(h[0]);
-//        h[0] = 0;
-//        //i代表站队已经站好的人数
-//        for(int i = 1; i < n; i++){
-//            int maxMinus = -1;
-//            int index = 0;
-//            for(int j = 0; j < n; j++){
-//                System.out.println("h["+j+"] = "+h[j]);
-//                if(h[j] != 0){
-//                    int minus = Math.abs(h[j] - a.get(i-1));
-//                    if(minus > maxMinus){
-//                        maxMinus = minus;
-//                        index = j;
-//                    }
-//                }
-//            }
-//            a.add(h[index]);
-//            h[index] = 0;
-//        }
-//        for(int i = 0; i < a.size(); i++){
-//            System.out.println(a.get(i));
-//        }
-//        int res = 0;
-//        for(int i = 0; i+1 < n; i++){
-//            res += Math.abs(a.get(i+1) - a.get(i));
-//        }
-//        System.out.println(res);
-//        Scanner sc = new Scanner(System.in);
-//        ArrayList<String> arrayList = new ArrayList<>();
-//        HashSet<String> hashSet = new HashSet<>();
-//        do{
-//            String s = sc.nextLine();
-//            System.out.println(s);
-//            if(s.equals(" ")){
-//                break;
-//            }else{
-//                //输入没有结束
-//                String regex = "^[a-z0-9A-Z]+$";
-//                if(s.matches(regex)) {
-//                    s = LeftRotateString(s, 10);
-//                    hashSet.add(s);
-//                }else {
-//                    arrayList.add(s);
-//                }
-//            }
-//        }while(true);
-//        Iterator it = hashSet.iterator();
-//        String[] right = new String[hashSet.size()];
-//        int i = 0;
-//        while(it.hasNext()){
-//            right[i] = it.next().toString();
-//            i++;
-//        }
-//        right = getUrlParam(right);
-//        for(int j = 0; j < right.length; j++){
-//            System.out.println(right[j]);
-//        }
-//        for(int j = 0; j < arrayList.size(); j++){
-//            System.out.println(arrayList.get(i));
-//        }
     }
 
+
+    public static int fun(int a, int b){
+        int oa=a;
+        int ob=b;
+        while(b!=0) {
+            int r = a % b;
+            a = b;
+            b = r;
+        }
+        System.out.println(oa+"与"+ob+"的最大公约数是"+a);
+        return a;
+    }
+
+
+
+    //递归方法：若是n=0或n=1,返回1，不然返回n*dowork(n-1)
+    public static long dowork(int n){
+        if(n==0 || n == 1){
+            return 1;
+        }
+        return n*dowork(n-1);
+    }
+    //非递归方法：n乘n-1,乘n-2,……到乘1
+    public static long dowork1(int n){
+        long res = 1;
+        for(int i = n; i >= 1; i--){
+            res *= i;
+        }
+        return res;
+    }
+
+
+
+
+    public static int[] sort(int[] nums){
+        for(int i = 0; i < nums.length; i ++){
+            for(int j = i; j < nums.length; j ++){
+                if(nums[i] > nums[j]){
+                    int t = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = t;
+                }
+            }
+        }
+        return nums;
+    }
 
     public static boolean sort(int a,int b){
         String a1 = a+"";
