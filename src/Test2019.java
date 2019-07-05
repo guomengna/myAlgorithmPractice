@@ -103,4 +103,34 @@ public class Test2019 {
         }
         return a;
     }
+
+    public void ifIP(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        if(s.length() < 7 || s.length() > 15){
+            System.out.println("NOT");
+            return;
+        }else {
+            String[] strs = s.split("\\.");
+            if(strs.length != 4){
+                System.out.println("NOT");
+                return;
+            }else {
+                for(int i = 0; i < strs.length; i++){
+                    if(strs[i].length() > 3){
+                        System.out.println("NOT");
+                        return;
+                    }else {
+                        for(int j = 0; j < strs[i].length(); j++){
+                            if(strs[i].charAt(j) < '0' || strs[i].charAt(j) > '9'){
+                                System.out.println("NOT");
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("IS");
+    }
 }
