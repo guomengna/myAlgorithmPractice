@@ -17,4 +17,15 @@ public class MultiThreads {
         thread1.start();
         thread2.start();
     }
+
+    public void call2(){
+        System.out.println("Start!");
+        Object locka = new Object();
+        Object lockb = new Object();
+        ThreadA threadA = new ThreadA(locka, lockb);
+        ThreadB threadB = new ThreadB(locka, lockb);
+        threadA.start();
+        threadB.start();
+        System.out.println("End......");
+    }
 }

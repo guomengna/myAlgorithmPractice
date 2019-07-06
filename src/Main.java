@@ -13,7 +13,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         MultiThreads multiThreads = new MultiThreads();
-        multiThreads.callproduct();
+        multiThreads.call2();
 
     }
 
@@ -29,8 +29,6 @@ public class Main {
         System.out.println(oa+"与"+ob+"的最大公约数是"+a);
         return a;
     }
-
-
 
     //递归方法：若是n=0或n=1,返回1，不然返回n*dowork(n-1)
     public static long dowork(int n){
