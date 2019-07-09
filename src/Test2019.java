@@ -133,4 +133,32 @@ public class Test2019 {
         }
         System.out.println("IS");
     }
+
+    // 快排
+    public void quicksort(int[] a, int p, int q){
+        if(p < q){
+            int r = partition(a, p, q);
+            quicksort(a, p, r-1);
+            quicksort(a, r+1, q);
+        }
+    }
+
+    //划分
+    public int partition(int[] a, int p, int q){
+        int x = a[p];
+        int i = p;
+        for(int j = p+1; j <= q; j++){
+            if(a[j] < x){
+                i++;
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        int t = a[i];
+        a[i] = a[p];
+        a[p] = t;
+        return i;
+    }
+
 }
