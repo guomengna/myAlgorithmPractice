@@ -1,9 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Test2019 {
     public void days(){
@@ -234,5 +231,33 @@ public class Test2019 {
             System.out.println("N");;
         }
     }
+    // 游戏海报
+    public void gameposts(){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int res = 0;
+        char[] c = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        if(str.length() == 1){
+            System.out.println(51);
+        }else{
+            HashMap<Character, Integer> map = new HashMap<>();
+            for(int i = 0; i < str.length(); i++){
+                if(map.get(str.charAt(i))!=null){
+                    map.put(str.charAt(i), map.get(str.charAt(i))+1);
+                }else{
+                    map.put(str.charAt(i), 1);
+                }
+            }
+            for(int i = 0; i < c.length; i++){
+                int count = 0;
+                if(map.get(c[i])!= null){
+                    count = map.get(c[i]);
+                }
+                int t = str.length() - count + 1;
+                res += t;
+            }
 
+            System.out.println(res);
+        }
+    }
 }
