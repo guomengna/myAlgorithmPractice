@@ -188,5 +188,51 @@ public class Test2019 {
         }
         System.out.println("none");
     }
+    // 迷路的牛牛
+    public void lostway(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String str = sc.next();
+        char[] s = new char[n];
+        for(int i = 0; i < n; i++){
+            s[i] = str.charAt(i);
+        }
+        int lc = 0;
+        int rc = 0;
+        for(int i = 0; i < n; i++){
+            if(s[i] == 'L'){
+                lc++;
+            }else{
+                rc++;
+            }
+        }
+        if(lc > rc){
+            lc = lc - rc;
+            int t = lc % 4;
+            if(t == 0){
+                System.out.println("N");
+            }else if(t == 1){
+                System.out.println("W");
+            }else if(t == 2){
+                System.out.println("S");;
+            }else if(t == 3){
+                System.out.println("E");;
+            }
+        }else if(lc < rc){
+            rc = rc - lc;
+            int t = rc % 4;
+            if(t == 0){
+                System.out.println("N");;
+            }else if(t == 1){
+                System.out.println("E");;
+            }else if(t == 2){
+                System.out.println("S");;
+            }else if(t == 3){
+                System.out.println("W");;
+            }
+        }else{
+            System.out.println("N");;
+        }
+    }
 
 }
