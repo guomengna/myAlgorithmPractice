@@ -12,12 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-        Test2019 t = new Test2019();
-        int a[] = {9, 8, 13, 6, 11};
-        t.quicksort(a, 0, a.length-1);
-        for (int i = 0; i < a.length; i++){
-            System.out.println(a[i]);
-        }
 
     }
 

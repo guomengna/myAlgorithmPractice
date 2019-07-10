@@ -2,6 +2,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Test2019 {
@@ -159,6 +160,33 @@ public class Test2019 {
         a[i] = a[p];
         a[p] = t;
         return i;
+    }
+
+    public void sameLincklistNode(){
+        LinkedList<Integer> l1 = new LinkedList<>();
+        l1.add(1);
+        l1.add(2);
+        l1.add(3);
+        l1.add(4);
+        l1.add(5);
+        LinkedList<Integer> l2 = new LinkedList<>();
+        l2.add(6);
+        l2.add(7);
+        int same = -1;
+        if(l1.size() < l2.size()){
+            LinkedList t = l1;
+            l1 = l2;
+            l2 = t;
+        }
+        int minus = l1.size() - l2.size();
+        for(int i = minus, j = 0; i < l1.size(); i++, j++){
+            if(l1.get(i) == l2.get(j)){
+                same = l1.get(i);
+                System.out.println(same);
+                return;
+            }
+        }
+        System.out.println("none");
     }
 
 }
