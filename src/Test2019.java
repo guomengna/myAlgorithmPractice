@@ -260,4 +260,19 @@ public class Test2019 {
             System.out.println(res);
         }
     }
+    // 字符串归一化
+    public void Stringyasuo(){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int[] nums = new int[26];
+        for(int i = 0; i < str.length(); i++){
+            nums[str.charAt(i)-97]++;
+        }
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] != 0){
+                System.out.print((char)(i+97));
+                System.out.print(nums[i]);
+            }
+        }
+    }
 }
