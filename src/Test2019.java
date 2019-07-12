@@ -275,4 +275,33 @@ public class Test2019 {
             }
         }
     }
+    // 回文子串
+    // 数出一个字符串中的回文子串的数量
+    public void numsofHuiwenSubString(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int res = s.length();
+        int count = 0;
+        for(int i = 0; i < s.length(); i++){
+            for(int j = i+1; j <= s.length(); j++){
+                String t = s.substring(i, j);
+                if(ifHuiwen(t)){
+                    count++;
+                }
+            }
+        }
+        System.out.println(count);
+    }
+    // 判断一个字符串是不是回文串
+    public boolean ifHuiwen(String s){
+        String s1 = "";
+        for(int i = s.length()-1; i >= 0; i--){
+            s1 += s.charAt(i);
+        }
+        if(s.equals(s1)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
