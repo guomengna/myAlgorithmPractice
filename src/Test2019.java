@@ -350,4 +350,25 @@ public class Test2019 {
         int res = Math.min(l, r);
         System.out.println(res);
     }
+
+    // 方格走法，动态规划算法
+    public void fanggeZoufa(){
+        Scanner sc = new Scanner(System.in);
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int[][] cp = new int[x+1][y+1];
+        for(int i = 0; i <= x; i++){
+            for(int j = 0; j <= y; j++){
+                if(i == 0 && j == 0){
+                    cp[i][j] = 0;
+                }else if(i == 0 || j == 0){
+                    cp[i][j] = 1;
+                }else{
+                    cp[i][j] = cp[i-1][j] + cp[i][j-1];
+                }
+            }
+        }
+        int res = cp[x][y];
+        System.out.println(res);
+    }
 }
