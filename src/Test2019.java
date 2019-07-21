@@ -304,4 +304,50 @@ public class Test2019 {
             return false;
         }
     }
+
+    // 鸡鸭分类
+    public void chickAndDuck(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        // D在左
+        int l = 0;
+        int[] count = new int[s.length()];
+        count[0] = -1;
+        if(s.charAt(0) == 'D'){
+            count[0] = 0;
+        }
+        for(int i = 1; i < s.length(); i++){
+            if(s.charAt(i) == 'D'){
+                count[i] = count[i-1] + 1;
+            }else{
+                count[i] = count[i-1];
+            }
+        }
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == 'D'){
+                l += i - count[i];
+            }
+        }
+        //D在右
+        int r = 0;
+        int[] count1 = new int[s.length()];
+        count1[s.length()-1] = -1;
+        if(s.charAt(s.length()-1) == 'D'){
+            count1[s.length()-1] = 0;
+        }
+        for(int i = s.length()-2; i >= 0; i--){
+            if(s.charAt(i) == 'D'){
+                count1[i] = count1[i+1] + 1;
+            }else{
+                count1[i] = count1[i+1];
+            }
+        }
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == 'D'){
+                r += s.length()-1 - i - count1[i];
+            }
+        }
+        int res = Math.min(l, r);
+        System.out.println(res);
+    }
 }

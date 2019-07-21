@@ -12,7 +12,20 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-
+        Scanner sc = new Scanner(System.in);
+        int y = sc.nextInt();
+        int m = sc.nextInt();
+        int d = sc.nextInt();
+        int[] date = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int res = 0;
+        for(int i = 1; i < m; i++){
+            res += date[i];
+            if(i == 2 && y % 4 == 0){
+                res += 1;
+            }
+        }
+        res += d;
+        System.out.println(res);
     }
 
 
