@@ -371,4 +371,51 @@ public class Test2019 {
         int res = cp[x][y];
         System.out.println(res);
     }
+
+    //会话列表
+    public void HuihuaList(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for(int i = 0; i < n; i++){
+            int n1 = sc.nextInt();
+            int[] num = new int[n1];
+            for(int j = 0; j < n1; j++){
+                num[j] = sc.nextInt();
+            }
+            ArrayList<Integer> a = new ArrayList<>();
+            for(int j = 0; j < n1; j++){
+                if(a.size() == 0){
+                    a.add(num[j]);
+                }else {
+                    int index = inArray(num[j], a);
+                    if(index != -1){
+                        int t = num[j];
+                        for(int k = index-1; k >= 0; k--){
+                            a.set(k+1, a.get(k));
+                        }
+                        a.set(0, t);
+                    }else{
+                        int size = a.size();
+                        a.add(num[j]);
+                        for(int k = size; k > 0; k--){
+                            a.set(k, a.get(k-1));
+                        }
+                        a.set(0, num[j]);
+                    }
+                }
+            }
+            for(int j = 0; j < a.size(); j++){
+                System.out.print(a.get(j)+" ");
+            }
+            System.out.println();
+        }
+    }
+    public int inArray(int j, ArrayList<Integer> a) {
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i) == j) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
