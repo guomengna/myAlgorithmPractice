@@ -1,3 +1,4 @@
+//阿里面试
 public class ALILock {
 //    public static void main(String[] args){
 //        //共用的对象，保证是同个锁
