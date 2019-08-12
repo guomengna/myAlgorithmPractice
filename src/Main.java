@@ -16,7 +16,7 @@ public class Main {
 
     }
 
-    //贝壳测试第4题
+    //贝壳测试第4题 通过64%
     public static void Beike4(){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
