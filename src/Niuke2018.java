@@ -780,4 +780,32 @@ public class Niuke2018 {
         }
         System.out.println(max);
     }
+
+    /**
+     * 寻找数组中任意一个重复的数字
+     * @param numbers
+     * @param length
+     * @param duplication
+     * @return
+     */
+    public static boolean duplicate(int numbers[],int length,int [] duplication) {
+        int[] r = new int[length];
+        for(int j = 0; j < length; j++){
+            r[j] = -1;
+        }
+        if(numbers == null || length == 0){
+            return false;
+        }else{
+            for(int i = 0; i < length; i++){
+                if(r[numbers[i]] == -1){
+                    r[numbers[i]] = numbers[i];
+                }else if(r[numbers[i]] == numbers[i]){
+                    duplication[0] = numbers[i];
+                    System.out.println("true " + duplication[0]);
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }

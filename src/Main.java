@@ -4,92 +4,247 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 //import java.util.*;
 import javax.swing.text.html.HTMLDocument;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
-    public static void main(String[] args) {
-        Niuke2018 niuke2018 = new Niuke2018();
-//        niuke2018.recycleNums();
+    public static void main(String[] args){
 
-//        niuke2018.sortString("9638");
+    }
 
-//        Scanner sc = new Scanner(System.in);
-//        int n = sc.nextInt();
-//        //将从控制台读取的数字存放在h中
-//        int[] h = new int[n];
-//        for(int i = 0; i < n; i++){
-//            h[i] = sc.nextInt();
-//        }
-//        for(int i = 0; i < n; i++){
-//            for(int j = i; j < n; j++){
-//                if(h[j] < h[i]){
-//                    int temp = h[j];
-//                    h[j] = h[i];
-//                    h[i] = temp;
-//                }
-//            }
-//        }
-//        //将站好的疯狂队列存在a中
-//        ArrayList<Integer> a = new ArrayList<>();
-//        a.add(h[0]);
-//        h[0] = 0;
-//        //i代表站队已经站好的人数
-//        for(int i = 1; i < n; i++){
-//            int maxMinus = -1;
-//            int index = 0;
-//            for(int j = 0; j < n; j++){
-//                System.out.println("h["+j+"] = "+h[j]);
-//                if(h[j] != 0){
-//                    int minus = Math.abs(h[j] - a.get(i-1));
-//                    if(minus > maxMinus){
-//                        maxMinus = minus;
-//                        index = j;
-//                    }
-//                }
-//            }
-//            a.add(h[index]);
-//            h[index] = 0;
-//        }
-//        for(int i = 0; i < a.size(); i++){
-//            System.out.println(a.get(i));
-//        }
-//        int res = 0;
-//        for(int i = 0; i+1 < n; i++){
-//            res += Math.abs(a.get(i+1) - a.get(i));
-//        }
-//        System.out.println(res);
-//        Scanner sc = new Scanner(System.in);
-//        ArrayList<String> arrayList = new ArrayList<>();
-//        HashSet<String> hashSet = new HashSet<>();
-//        do{
-//            String s = sc.nextLine();
-//            System.out.println(s);
-//            if(s.equals(" ")){
-//                break;
-//            }else{
-//                //输入没有结束
-//                String regex = "^[a-z0-9A-Z]+$";
-//                if(s.matches(regex)) {
-//                    s = LeftRotateString(s, 10);
-//                    hashSet.add(s);
-//                }else {
-//                    arrayList.add(s);
-//                }
-//            }
-//        }while(true);
-//        Iterator it = hashSet.iterator();
-//        String[] right = new String[hashSet.size()];
-//        int i = 0;
-//        while(it.hasNext()){
-//            right[i] = it.next().toString();
-//            i++;
-//        }
-//        right = getUrlParam(right);
-//        for(int j = 0; j < right.length; j++){
-//            System.out.println(right[j]);
-//        }
-//        for(int j = 0; j < arrayList.size(); j++){
-//            System.out.println(arrayList.get(i));
-//        }
+    public static void Beike4(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        long[] num = new long[n];
+        for(int i = 0; i < n; i++){
+            num[i] = sc.nextLong();
+        }
+        if(n == 1){
+            System.out.println(0);
+            return;
+        }
+        if(n == 2 && num[0] != num[1]){
+            System.out.println(0);
+            return;
+        }
+        long minTotal = Long.MAX_VALUE;
+
+        for(int i = 0; i < n; i++){
+            long[] nums = new long[n];
+            for(int j = 0; j < n; j++){
+                nums[j] = num[j];
+            }
+            long min = 0;
+            //i及之前递增；
+            for(int j = 0; j+1 <= i; j++){
+                if(nums[j+1] <= nums[j]){
+                    long t = nums[j+1];
+                    nums[j+1] = nums[j]+1;
+                    min += nums[j+1] - t;
+                }
+            }
+            for(int j = i; j+1 < n; j++){
+                if(nums[j] < nums[j+1]){
+                    long t = nums[j];
+                    nums[j] = nums[j+1] + 1;
+                    min += nums[j] - t;
+                }
+            }
+            if(i != n-1 && nums[i] == nums[i+1]){
+                nums[i+1]++;
+                min++;
+            }
+            minTotal = Math.min(minTotal, min);
+        }
+        System.out.println(minTotal);
+    }
+
+    public static boolean judge(String str, String pat){
+        String[] strs = str.split(" ");
+        if(strs.length != pat.length()){
+//            System.out.println("false");
+            return false;
+        }
+        HashMap<Character, String> map = new HashMap<>();
+        for(int i = 0; i < strs.length; i++){
+            char c = pat.charAt(i);
+            if(map.get(c) == null){
+                map.put(c, strs[i]);
+            }else if(!map.get(c).equals(strs[i])){
+//                System.out.println("false");
+                return false;
+            }
+        }
+//        System.out.println("true");
+        return true;
+    }
+
+    public static boolean judgeReverse(String str, String pat){
+        String[] strs = str.split(" ");
+        if(strs.length != pat.length()){
+//            System.out.println("false");
+            return false;
+        }
+        HashMap<String, Character> map = new HashMap<>();
+        for(int i = 0; i < strs.length; i++){
+            char c = pat.charAt(i);
+            if(map.get(strs[i]) == null){
+                map.put(strs[i], c);
+            }else if(!map.get(strs[i]).equals(c)){
+//                System.out.println("false");
+                return false;
+            }
+        }
+//        System.out.println("true");
+        return true;
+    }
+
+
+    public static void readIPs() throws Exception{
+        File file = new File("E:\\file.txt");
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        StringBuilder sb = new StringBuilder();
+        String s = "";
+        while((s = bufferedReader.readLine()) != null){
+            sb.append(s+"\n");
+        }
+        bufferedReader.close();
+        String string  = sb.toString();
+        String patternStr = "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}";
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher m = pattern.matcher(string);
+        while(m.find()){
+            System.out.println(m.group(0));
+        }
+    }
+
+    /**
+     * 全排列，无重复数字
+     * @param array 排列的数组
+     * @param k 从第k个数字开始排列
+     * @param m 数组的最后一个元素的下标
+     */
+    public static void quanSort(int[] array, int k, int m){
+        if(k == m){
+            for(int i = 0; i < array.length; i++){
+                System.out.print(array[i]);
+            }
+            System.out.println();
+        }else {
+            for(int i = k; i <= m; i++){
+                int temp = array[i];
+                array[i] = array[k];
+                array[k] = temp;
+
+                quanSort(array, k+1, m);
+
+                int temp1 = array[i];
+                array[i] = array[k];
+                array[k] = temp1;
+            }
+        }
+    }
+
+    public static void quanSort1(int[] array, int k, int m){
+        if(k == m){
+            for(int i = 0; i < array.length; i++){
+                System.out.print(array[i]);
+            }
+            System.out.println();
+        }else {
+            for(int i = k; i <= m; i++){
+                if(!has(array, k, i)){
+                    int temp = array[i];
+                    array[i] = array[k];
+                    array[k] = temp;
+
+                    quanSort(array, k+1, m);
+
+                    int temp1 = array[i];
+                    array[i] = array[k];
+                    array[k] = temp1;
+                }
+            }
+        }
+    }
+    public static boolean has(int[] array, int i, int j){
+        for(int k = i; k < j; k++){
+            if(array[k] == array[j]){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean Find(int target, int [][] array) {
+        for(int i = 0; i < array.length; i++){
+            if(target == array[i][0] || target == array[i][array[i].length-1]){
+                return true;
+            }
+            if(target > array[i][0] && target < array[i][array[i].length-1]){
+                for(int j = 0; j < array[i].length-1; j++){
+                    if(target == array[i][j]){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public static ArrayList<Integer> sort(ArrayList<Integer> a){
+        for(int i = 0; i < a.size(); i++){
+            for(int j = i; j < a.size(); j++){
+                if(a.get(i) < a.get(j)){
+                    int t = a.get(i);
+                    a.set(i, a.get(j));
+                    a.set(j, t);
+                }
+            }
+        }
+
+        return a;
+    }
+    //寻找连续子序列
+    public static ArrayList<ArrayList<Integer>> getSubnum(int[] a){
+        ArrayList<Integer> res = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> r = new ArrayList<>();
+        res.add(a[0]);
+        for(int i = 0; i+1 < a.length; i++){
+
+            if(a[i] + 1 == a[i+1]){
+                res.add(a[i+1]);
+            }else {
+                if(res.size() <= 1){
+                    res = new ArrayList<Integer>();
+                }else {
+                    r.add(res);
+                }
+                res = new ArrayList<Integer>();
+            }
+        }
+        res = new ArrayList<>();
+        res.add(a[0]);
+        for(int i = 0; i+1 < a.length; i++){
+            if(a[i] - 1 == a[i+1]){
+                res.add(a[i+1]);
+            }else {
+                if(res.size() == 1){
+                    res = new ArrayList<Integer>();
+                }else {
+                    r.add(res);
+                }
+                res = new ArrayList<Integer>();
+            }
+        }
+
+        return r;
     }
 
 
