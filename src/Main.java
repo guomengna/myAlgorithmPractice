@@ -13,7 +13,179 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args){
+        beike2();
 
+    }
+
+    //琪琪有N个数字，她想知道有多少数字可以恰好用剩余n-1中的两个数字的和表示
+    public static void beike2(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> num = new ArrayList<>(n);
+        for(int i = 0; i < n; i++){
+            num.add(sc.nextInt());
+        }
+        num = sort1(num);
+        int res = 0;
+        for(int i = 0; i < n; i++){
+            int target = num.get(i);
+            //剩余n-1个数字,排过序了
+            ArrayList<Integer> a = new ArrayList<>(n-1);
+            for(int j = 0; j < n; j++){
+                if(j != i){
+                    a.add(num.get(j));
+                }
+            }
+            outer:
+            for(int j = 0; j < a.size(); j++){
+                for(int k = j+1; k < a.size(); k++){
+                    if(a.get(j) + a.get(k) == target){
+                        res++;
+                        break outer;
+                    }else if(a.get(j) + a.get(k) > target){
+                        break;
+                    }
+                }
+            }
+        }
+        System.out.println(res);
+    }
+
+    public static ArrayList<Integer> sort1(ArrayList<Integer> a){
+        for(int i = 0; i < a.size(); i++){
+            for(int j = i; j < a.size(); j++){
+                if(a.get(i) > a.get(j)){
+                    int t = a.get(i);
+                    a.set(i, a.get(j));
+                    a.set(j, t);
+                }
+            }
+        }
+        return a;
+    }
+
+    //洗牌算法：未规定牌不能出现在原来的地方
+    public static void xipai(){
+        int[] a = {1,2,3,4,5,6,7,8,9,10,11,12,13,14};
+        ArrayList<Integer> a1 = new ArrayList<>();
+        for(int i =0; i < a.length; i++){
+            a1.add(a[i]);
+        }
+        //洗牌之后的数组
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        int count = a1.size();
+        while(count > 0){
+            Random r = new Random();
+            int index = r.nextInt(count);
+            arrayList.add(a1.get(index));
+            a1.remove(index);
+            count = a1.size();
+        }
+        for(int i = 0; i < arrayList.size(); i++){
+            System.out.print(arrayList.get(i)+" ");
+        }
+    }
+
+    //寻找第K大的数
+    public static void findKMax(int[] a, int l, int r, int k){
+        if(l < r){
+           int index = partBigFirst(a, l, r);
+           if(index == k){
+               System.out.println(a[k]);
+           }else if(index > k){
+               findKMax(a, l, index-1, k);
+           }else{
+               findKMax(a, index+1, r, k);
+           }
+        }else {
+            System.out.println(a[l]);
+        }
+    }
+
+    public static int partBigFirst(int[] a, int l, int r){
+        int pivot = a[l];
+        int i = l;
+        for(int j = l+1; j <= r; j++){
+            if(a[j] > pivot){
+                i++;
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        int t = a[i];
+        a[i] = a[l];
+        a[l] = t;
+        return i;
+    }
+
+    public static void sumIsM(){
+        int[] a = {2,33,4,5,7,9,12};
+        int m = 12;
+        for(int i = 0; i < a.length; i++){
+            for(int j = i+1; j < a.length; j++){
+                if(a[j] < a[i]){
+                    int t = a[i];
+                    a[i] = a[j];
+                    a[j] = t;
+                }
+            }
+        }
+        for(int i = 0; i < a.length; i++){
+            int sum = 0;
+            ArrayList<Integer> arrayList = new ArrayList<>();
+            if(a[i] == m){
+                System.out.println(a[i]);
+            }else if(a[i] > m){
+                break;
+            }else{
+                sum += a[i];
+                arrayList.add(a[i]);
+                for(int j = i+1; j < a.length; j++){
+                    if(a[j] + sum == m){
+                        arrayList.add(a[j]);
+                        for(int k = 0; k < arrayList.size(); k++){
+                            System.out.print(arrayList.get(k)+" ");
+                        }
+                        System.out.println();
+                        arrayList.clear();
+                        break;
+                    }else if(a[j] + sum > m){
+                        arrayList.clear();
+                        break;
+                    }else {
+                        arrayList.add(a[j]);
+                        sum += a[j];
+                    }
+                }
+            }
+        }
+    }
+
+    //快排
+    public static void quickSort(int[] a, int p, int q){
+        if(p < q){
+            int r = patition(a, p, q);
+            quickSort(a, p, r-1);
+            quickSort(a, r+1, q);
+        }
+    }
+
+    public static int patition(int[] a, int p, int q){
+        int pviot = a[p];
+        int i = p;
+        for(int j = i+1; j <= q; j++){
+            if(a[j] < pviot){
+                i++;
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        int t = a[i];
+        a[i] = pviot;
+        a[p] = t;
+        return i;
     }
 
 
