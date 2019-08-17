@@ -13,8 +13,156 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args){
-        beike2();
 
+    }
+
+    public static void t3(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for(int i = 0; i < n; i++){
+            nums[i] = sc.nextInt();
+        }
+        for(int i = 0; i < n; i++){
+            if(i == n-1){
+                int r = 2;
+                int low = nums[i-1];
+                for(int j = i-2; j >= 0; j--){
+                    if(nums[j] > low){
+                        low = nums[j];
+                        r++;
+                    }
+                }
+                System.out.print(r+" ");
+            }else if(i == 0){
+                int r = 2;
+                int high = nums[i+1];
+                for(int j = i+2; j < n; j++){
+                    if(nums[j] > high){
+                        high = nums[j];
+                        r++;
+                    }
+                }
+                System.out.print(r+" ");
+            }else {
+//                System.out.println("i = "+i);
+                int r = 3;
+                int low = nums[i-1];
+                int high = nums[i+1];
+                for(int j = i-2; j >= 0; j--){
+//                    System.out.println("low = "+low +" and nums[j] = "+nums[j]);
+                    if(nums[j] > low){
+                        low = nums[j];
+                        r++;
+                    }
+                }
+                for(int j = i+2; j < n; j++){
+//                    System.out.println("high = "+high +" and nums[j] = "+nums[j]);
+                    if(nums[j] > high){
+                        high = nums[j];
+                        r++;
+                    }
+                }
+                System.out.print(r+" ");
+            }
+        }
+    }
+
+    public static void t2(){
+        Scanner sc = new Scanner(System.in);
+        int n1 = sc.nextInt();
+        int n = 1;
+        for(int i = 0; i < n1; i++){
+            n *= 2;
+        }
+        int[] nums = new int[n];
+        for(int i = 0; i < n; i++){
+            nums[i] = sc.nextInt();
+        }
+        int m = sc.nextInt();
+        int[] fan = new int[m];
+        for(int i = 0; i < m; i++){
+            fan[i] = sc.nextInt();
+        }
+        for(int i = 0; i < m; i++){
+            //翻转的一组的长度
+            int fanLength = 1;
+            for(int j = 0; j < fan[i]; j++){
+                fanLength *= 2;
+            }
+            fanzhuan(nums, fanLength);
+        }
+    }
+
+    public static int[] fanzhuan(int[] a, int size){
+        int i = 0;
+        int j = i + size-1;
+        while(j < a.length){
+            int i1 = i;
+            int j1 = j;
+            while(i1 < j1){
+                //翻转
+                int t = a[i1];
+                a[i1] = a[j1];
+                a[j1] = t;
+                i1++;
+                j1--;
+            }
+            i = j + 1;
+            j = i + size;
+        }
+        for(int k = 0; k < a.length; k++){
+            System.out.print(a[k]);
+        }
+        return a;
+    }
+
+
+    public static void t1(){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        Stack<Integer> s1 = new Stack<>();
+        Stack<String> s2 = new Stack<>();
+        String r = "";
+        int i = 0;
+        while(i < s.length()){
+            if(s.charAt(i) == '['){
+                //数字压栈1
+                s1.push(Integer.parseInt(String.valueOf(s.charAt(i+1))));
+                i++;
+                //字母压栈2
+                int j = i+1;
+                int index = -1;
+                while(j < s.length()){
+                    if(s.charAt(j) == '[' || s.charAt(j) == ']'){
+                        index = j - 1;
+                        break;
+                    }
+                    j++;
+                }
+                s2.push(s.substring(i+2, index+1));
+//                System.out.println(s.substring(i+2, index+1));
+                i = index + 1;
+            }else if(s.charAt(i) == ']'){
+                String tem = s2.pop();
+                String re = "";
+                int count = s1.pop();
+                for(int j = 0; j < count; j++){
+                    re += tem;
+                }
+                if(!s2.empty()){
+                    String re1 = s2.pop() + re;
+                    s2.push(re1);
+                }else {
+                    r += re;
+                }
+                i++;
+            }else {
+                r +=  s.charAt(i);
+                i++;
+            }
+        }
+        System.out.println(r);
     }
 
     //琪琪有N个数字，她想知道有多少数字可以恰好用剩余n-1中的两个数字的和表示
