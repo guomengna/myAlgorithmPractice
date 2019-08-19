@@ -12,8 +12,131 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+    public static Map<Integer, Integer> cou;
+    public static Map<Integer, List<Integer>> map;
     public static void main(String[] args){
 
+    }
+
+    public static void Shangtang3(){
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int c = sc.nextInt();
+        int f0 = sc.nextInt();
+        final int t = 1000000007;
+        int[] nums = new int[4];
+        nums[0] = f0;
+        nums[1] = a * nums[0] + 32768;
+        nums[2] = a * nums[1] + b * nums[0] + 2 * 2 * 2 - 2 + 32767;
+        nums[3] = a * nums[2] + b * nums[1] + c * nums[0] + 2 * 3 * 3 - 3 + 32767;
+        for(int i = 4; i <= n; i++){
+            int temp = (a * nums[(i-1) % 3] + b * nums[(i-2) % 3]
+                    + c * nums[(i-3) % 3] + 2 * i * i - i + 32767) % t;
+            nums[i % 3] = temp;
+        }
+        System.out.println(nums[(int)(n % 3)]);
+    }
+
+    public static void Shangtang4(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] num = new int[n];
+        for(int i = 0; i < n; i++){
+            num[i] = sc.nextInt();
+        }
+        if(n == 1){
+            System.out.println(0);
+            return;
+        }
+        cou = new HashMap<>();
+        map = new HashMap<>();
+        for(int i : num){
+            cou.put(i, cou.getOrDefault(i, 0) + 1);
+        }
+        for(int i : cou.keySet()){
+            map.put(i, new ArrayList<Integer>());
+        }
+        for(int i : cou.keySet()){
+            for(int j : cou.keySet()){
+                int t = (int) (Math.sqrt(i+j)+0.5);
+                if(t * t == i+j){
+                    map.get(i).add(j);
+                }
+            }
+        }
+        int result = 0;
+        for(int i : cou.keySet()){
+            result += fun(i, n-1);
+        }
+        System.out.println(result);
+    }
+
+    public static int fun(int i, int size){
+        cou.put(i, cou.get(i) - 1);
+        int res = 1;
+        if(size != 0){
+            res = 0;
+            for(int j : map.get(i)){
+                if(cou.get(j) !=0){
+                    res += fun(j, size-1);
+                }
+            }
+        }
+        cou.put(i,cou.get(i) + 1);
+        return res;
+    }
+
+
+    public static void Shangtang2(){
+        Scanner sc =new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] num = new int[n];
+        for(int i = 0; i < n; i++){
+            num[i] = sc.nextInt();
+        }
+        if(num == null || num.length < 3){
+            System.out.println(0);
+            return;
+        }
+        int result = 0;
+        for(int i = 1; i< num.length-1; i++){
+            if(num[i] > num[i-1] && num[i] > num[i+1]){
+                int left = i-1;
+                int right = i+1;
+                while(left > 0 && num[left - 1] < num[left]){
+                    left--;
+                }
+                while(right < num.length-1 && num[right] > num[right+1]){
+                    right++;
+                }
+                result = Math.max(result, right-left+1);
+            }
+        }
+        System.out.println(result);
+    }
+
+    public static void Shangtang1(){
+        Scanner sc =new Scanner(System.in);
+        String s = sc.nextLine();
+        Stack<Integer> stack = new Stack<>();
+        String[] strs = s.split(" ");
+        for(int i = 0; i < strs.length; i++){
+            if(strs[i].equals("+")){
+                stack.push(stack.pop() + stack.pop());
+            }else if(strs[i].equals("-")){
+                stack.push(-stack.pop() + stack.pop());
+            }else if(strs[i].equals("*")){
+                stack.push(stack.pop() * stack.pop());
+            }else if(strs[i].equals("/")){
+                int temp = stack.pop();
+                stack.push(stack.pop() / temp);
+            }else {
+                stack.push(Integer.parseInt(strs[i]));
+            }
+        }
+        System.out.println(stack.pop());
     }
 
     public static void t3(){
@@ -237,14 +360,14 @@ public class Main {
     //寻找第K大的数
     public static void findKMax(int[] a, int l, int r, int k){
         if(l < r){
-           int index = partBigFirst(a, l, r);
-           if(index == k){
-               System.out.println(a[k]);
-           }else if(index > k){
-               findKMax(a, l, index-1, k);
-           }else{
-               findKMax(a, index+1, r, k);
-           }
+            int index = partBigFirst(a, l, r);
+            if(index == k){
+                System.out.println(a[k]);
+            }else if(index > k){
+                findKMax(a, l, index-1, k);
+            }else{
+                findKMax(a, index+1, r, k);
+            }
         }else {
             System.out.println(a[l]);
         }
