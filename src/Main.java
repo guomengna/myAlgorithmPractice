@@ -12,10 +12,90 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-    public static Map<Integer, Integer> cou;
-    public static Map<Integer, List<Integer>> map;
     public static void main(String[] args){
 
+    }
+
+    public static void didi1(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[][] nums = new int[n][m];
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                nums[i][j] = sc.nextInt();
+            }
+        }
+        int res = 0;
+        for(int i = 0; i < m; i++){
+            int tMax = 0;
+            for(int j = 0; j < n; j++){
+                tMax = Math.max(tMax, nums[j][i]);
+            }
+            res += tMax;
+        }
+        System.out.println(res);
+    }
+
+    //36%
+    public static void didi2(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for(int i = 0; i < n; i++){
+            nums[i] = sc.nextInt();
+        }
+        if(n < 3){
+            return;
+        }
+        long res = 0;
+        int count  = 0;
+        for(int i = 0; i < n; i++){
+            if(nums[i] >= 0){
+                res += nums[i];
+                count++;
+            }
+        }
+        if(count == n){
+            System.out.println(res);
+            return;
+        }
+        res = 0;
+        for(int i = 0; i < n; i++){
+            res += nums[i];
+        }
+//        System.out.println("res = "+res);
+        for(int i = 1; i < n; i++){
+            for(int s = 0; s < n; s++){
+                int temp = 0;
+                int cou = 0;
+                for(int j = 0; j < n; ){
+                    temp += nums[j];
+                    j += i;
+                    cou++;
+                }
+                if(cou >= 3){
+//                System.out.println("temp = "+temp);
+                    res = Math.max(res, temp);
+                }
+            }
+        }
+        System.out.println(res);
+    }
+
+    public static int Switch(int n){
+        int i = 10;
+        switch (n){
+            case 1:i--;
+            case 2:i++;
+            case 3:i--;
+            case 4:i++;
+            case 5:i--;
+            case 6:i++;
+            case 7:i--;
+            default:i--;
+        }
+        return i+n;
     }
 
     public static void Shangtang3(){
@@ -39,54 +119,54 @@ public class Main {
         System.out.println(nums[(int)(n % 3)]);
     }
 
-    public static void Shangtang4(){
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] num = new int[n];
-        for(int i = 0; i < n; i++){
-            num[i] = sc.nextInt();
-        }
-        if(n == 1){
-            System.out.println(0);
-            return;
-        }
-        cou = new HashMap<>();
-        map = new HashMap<>();
-        for(int i : num){
-            cou.put(i, cou.getOrDefault(i, 0) + 1);
-        }
-        for(int i : cou.keySet()){
-            map.put(i, new ArrayList<Integer>());
-        }
-        for(int i : cou.keySet()){
-            for(int j : cou.keySet()){
-                int t = (int) (Math.sqrt(i+j)+0.5);
-                if(t * t == i+j){
-                    map.get(i).add(j);
-                }
-            }
-        }
-        int result = 0;
-        for(int i : cou.keySet()){
-            result += fun(i, n-1);
-        }
-        System.out.println(result);
-    }
-
-    public static int fun(int i, int size){
-        cou.put(i, cou.get(i) - 1);
-        int res = 1;
-        if(size != 0){
-            res = 0;
-            for(int j : map.get(i)){
-                if(cou.get(j) !=0){
-                    res += fun(j, size-1);
-                }
-            }
-        }
-        cou.put(i,cou.get(i) + 1);
-        return res;
-    }
+//    public static void Shangtang4(){
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int[] num = new int[n];
+//        for(int i = 0; i < n; i++){
+//            num[i] = sc.nextInt();
+//        }
+//        if(n == 1){
+//            System.out.println(0);
+//            return;
+//        }
+//        cou = new HashMap<>();
+//        map = new HashMap<>();
+//        for(int i : num){
+//            cou.put(i, cou.getOrDefault(i, 0) + 1);
+//        }
+//        for(int i : cou.keySet()){
+//            map.put(i, new ArrayList<Integer>());
+//        }
+//        for(int i : cou.keySet()){
+//            for(int j : cou.keySet()){
+//                int t = (int) (Math.sqrt(i+j)+0.5);
+//                if(t * t == i+j){
+//                    map.get(i).add(j);
+//                }
+//            }
+//        }
+//        int result = 0;
+//        for(int i : cou.keySet()){
+//            result += fun(i, n-1);
+//        }
+//        System.out.println(result);
+//    }
+//
+//    public static int fun(int i, int size){
+//        cou.put(i, cou.get(i) - 1);
+//        int res = 1;
+//        if(size != 0){
+//            res = 0;
+//            for(int j : map.get(i)){
+//                if(cou.get(j) !=0){
+//                    res += fun(j, size-1);
+//                }
+//            }
+//        }
+//        cou.put(i,cou.get(i) + 1);
+//        return res;
+//    }
 
 
     public static void Shangtang2(){
