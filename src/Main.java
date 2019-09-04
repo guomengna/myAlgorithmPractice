@@ -4,6 +4,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 //import java.util.*;
 import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.StyleSheet;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,7 +14,89 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args){
-
+        String s = "";
+        String res = resolve(s);
+        System.out.println(res);
+    }
+    //xiecheng 2
+    static String resolve(String expr) {
+        Stack<Character> s1 = new Stack<>();
+        Stack<Character> s2 = new Stack<>();
+        String res = "";
+        for(int i = 0; i < expr.length(); i++){
+            char c = expr.charAt(i);
+            if(c == '('){
+                s1.push(c);
+            }else if(c == ')' && !s1.isEmpty()){
+                s1.pop();
+            }
+        }
+        if(!s1.isEmpty()){
+            return "";
+        }
+        for(int i = 0; i < expr.length(); i++){
+            String t = "";
+            char c = expr.charAt(i);
+            if(c == '('){
+                s1.push(c);
+            }else if(c == ')'){
+                if(s1.isEmpty()){
+                    return "";
+                }
+                s1.pop();
+                while(!s2.isEmpty()){
+                    char ct = s2.pop();
+                    t += String.valueOf(ct);
+                }
+                if(s1.isEmpty()){
+                    res = t;
+                }
+                if(!s1.isEmpty()){
+                    for(int j = 0; j < t.length(); j++){
+                        s2.push(t.charAt(j));
+                    }
+                }
+            }else {
+                if(s1.isEmpty()){
+                    res += String.valueOf(c);
+                }else {
+                    s2.push(c);
+                }
+            }
+        }
+        return res;
+    }
+    //xiecheng 3
+    static int schedule(int m,int[] array) {
+        int l = 0;
+        int r = 0;
+        for(int i = 0; i < array.length; i++){
+            l = Math.max(l, array[i]);
+            r += array[i];
+        }
+        int middle = 0;
+        while(l < r){
+            middle = (l + r)/2;
+            int temp = 1;
+            int sum = array[0];
+            for(int i = 1; i < array.length; i++){
+                if(sum+array[i] <= middle){
+                    sum += array[i];
+                }else{
+                    temp++;
+                    if(temp > m){
+                        break;
+                    }
+                    sum = array[i];
+                }
+            }
+            if(temp > m){
+                l = middle + 1;
+            }else{
+                r = middle;
+            }
+        }
+        return r;
     }
 
     public static void didi1(){
